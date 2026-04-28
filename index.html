@@ -4,90 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CORPASEGO – Solicitud Seguro de Vida</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #C8952A;
-    --gold-light: #E8B84B;
-    --gold-pale: #FDF6E3;
-    --gold-glow: rgba(200,149,42,0.18);
-    --navy: #1A2744;
-    --navy-mid: #253562;
-    --navy-light: #3A4F82;
+    --orange: #E8820A;
+    --orange-dark: #C46A00;
+    --orange-light: #F5A93A;
+    --orange-pale: #FFF7EC;
+    --orange-glow: rgba(232,130,10,0.15);
+    --blue: #1A4A8A;
+    --blue-dark: #0F2F5C;
+    --blue-light: #2A6CC4;
+    --blue-pale: #EEF4FF;
     --white: #FFFFFF;
-    --gray-50: #FAFAF8;
-    --gray-100: #F4F4F1;
-    --gray-200: #E8E8E3;
-    --gray-400: #AAAAAA;
-    --gray-600: #666666;
-    --gray-800: #2E2E2E;
+    --off-white: #FDFAF5;
+    --gray-50: #F9F6F0;
+    --gray-100: #F0EBE0;
+    --gray-200: #DDD5C5;
+    --gray-400: #9A8E7A;
+    --gray-600: #5C5040;
+    --gray-800: #2A2018;
+    --dark: #1A1208;
     --error: #C0392B;
     --error-bg: #FFF5F5;
     --success: #1A7A4A;
     --success-bg: #F0FFF7;
-    --radius: 14px;
-    --radius-sm: 9px;
-    --shadow: 0 4px 24px rgba(26,39,68,0.10);
-    --shadow-lg: 0 12px 48px rgba(26,39,68,0.22);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(26,18,8,0.10);
+    --shadow-lg: 0 12px 48px rgba(26,18,8,0.18);
     --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+    --font-size-base: 17px;
+    --font-size-label: 0.88rem;
+    --font-size-input: 1rem;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--navy);
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--off-white);
     min-height: 100vh;
     color: var(--gray-800);
-    background-image: radial-gradient(ellipse at 20% 0%, rgba(200,149,42,0.07) 0%, transparent 60%),
-                      radial-gradient(ellipse at 80% 100%, rgba(58,79,130,0.3) 0%, transparent 60%);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    background-image:
+      radial-gradient(ellipse at 0% 0%, rgba(232,130,10,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 100%, rgba(232,130,10,0.04) 0%, transparent 50%);
   }
 
   /* ── HEADER ── */
   .site-header {
-    background: transparent;
-    padding: 32px 0 0;
+    background: var(--white);
+    border-bottom: 3px solid var(--blue);
+    padding: 18px 0;
     text-align: center;
+    box-shadow: 0 2px 16px rgba(26,18,8,0.08);
   }
   .logo-box {
-    display: inline-block;
-    background: var(--white);
-    padding: 12px 32px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 0 1px rgba(200,149,42,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
   }
+  .logo-emblem {
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 16px rgba(26,74,138,0.3);
+    flex-shrink: 0;
+  }
+  .logo-text { text-align: left; }
   .logo-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: 0.12em;
+    font-family: 'Merriweather', serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: var(--blue-dark);
+    letter-spacing: 0.08em;
+    line-height: 1;
   }
   .logo-sub {
-    font-size: 0.6rem;
-    letter-spacing: 0.24em;
-    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    color: var(--blue);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    margin-top: 3px;
   }
   .header-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    color: rgba(232,184,75,0.7);
-    font-size: 0.88rem;
-    letter-spacing: 0.2em;
+    font-family: 'Merriweather', serif;
+    color: var(--gray-400);
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-top: 10px;
+    margin-top: 8px;
     font-style: italic;
   }
 
   /* ── PROGRESS ── */
   .progress-wrap {
-    background: rgba(26,39,68,0.92);
-    backdrop-filter: blur(12px);
-    padding: 16px 0 0;
+    background: var(--white);
+    padding: 14px 0 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 1px solid rgba(200,149,42,0.15);
+    border-bottom: 2px solid var(--gray-100);
+    box-shadow: 0 2px 12px rgba(26,18,8,0.06);
   }
   .progress-steps {
     display: flex;
@@ -114,56 +136,56 @@
     left: calc(50% + 13px);
     right: calc(-50% + 13px);
     height: 2px;
-    background: rgba(255,255,255,0.1);
+    background: var(--gray-200);
     z-index: 0;
     transition: background 0.4s;
   }
   .step-dot:last-child::before { display: none; }
   .step-circle {
-    width: 26px; height: 26px;
+    width: 27px; height: 27px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.07);
-    border: 2px solid rgba(255,255,255,0.12);
+    background: var(--gray-100);
+    border: 2px solid var(--gray-200);
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: rgba(255,255,255,0.3);
+    color: var(--gray-400);
     position: relative;
     z-index: 1;
     transition: var(--transition);
   }
   .step-dot.active .step-circle {
-    background: var(--gold);
-    border-color: var(--gold-light);
-    color: var(--navy);
-    box-shadow: 0 0 0 4px rgba(200,149,42,0.22), 0 0 16px rgba(200,149,42,0.35);
+    background: var(--orange);
+    border-color: var(--orange-dark);
+    color: var(--white);
+    box-shadow: 0 0 0 4px rgba(232,130,10,0.2);
   }
   .step-dot.done .step-circle {
-    background: rgba(200,149,42,0.25);
-    border-color: var(--gold);
-    color: var(--gold-light);
+    background: var(--orange-pale);
+    border-color: var(--orange);
+    color: var(--orange-dark);
   }
-  .step-dot.done::before { background: rgba(200,149,42,0.4); }
+  .step-dot.done::before { background: rgba(232,130,10,0.4); }
   .step-label {
-    font-size: 0.55rem;
-    color: rgba(255,255,255,0.3);
+    font-size: 0.56rem;
+    color: var(--gray-400);
     margin-top: 5px;
     text-align: center;
     white-space: nowrap;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
   }
-  .step-dot.active .step-label { color: var(--gold-light); }
-  .step-dot.done .step-label { color: rgba(232,184,75,0.5); }
+  .step-dot.active .step-label { color: var(--orange-dark); }
+  .step-dot.done .step-label { color: var(--orange); }
   .progress-bar-line {
-    height: 3px;
-    background: rgba(255,255,255,0.06);
-    margin-top: 14px;
+    height: 4px;
+    background: var(--gray-100);
+    margin-top: 12px;
   }
   .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    background: linear-gradient(90deg, var(--orange-dark), var(--orange-light));
     transition: width 0.55s cubic-bezier(0.4,0,0.2,1);
   }
 
@@ -175,11 +197,12 @@
   }
   .form-card {
     background: var(--white);
-    border-radius: 20px;
+    border-radius: 16px;
     box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 700px;
+    max-width: 720px;
     overflow: hidden;
+    border: 1px solid var(--gray-200);
     animation: cardIn 0.45s cubic-bezier(0.4,0,0.2,1);
   }
   @keyframes cardIn {
@@ -189,64 +212,65 @@
 
   /* ── SECTION HEADER ── */
   .section-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    padding: 32px 40px 26px;
+    background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 60%, var(--orange-light) 100%);
+    padding: 32px 44px 28px;
     position: relative;
     overflow: hidden;
   }
   .section-header::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 200px; height: 200px;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,149,42,0.08), transparent 70%);
+    background: rgba(255,255,255,0.06);
   }
   .section-header::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light) 60%, transparent);
+    height: 4px;
+    background: rgba(255,255,255,0.25);
   }
   .section-number {
-    font-size: 0.68rem;
-    letter-spacing: 0.26em;
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: rgba(255,255,255,0.85);
     margin-bottom: 8px;
-    font-weight: 600;
+    font-weight: 700;
   }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.75rem;
+    font-family: 'Merriweather', serif;
+    font-size: 1.8rem;
     color: var(--white);
     line-height: 1.2;
-    font-weight: 600;
+    font-weight: 900;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
   .section-subtitle {
-    color: rgba(255,255,255,0.55);
-    font-size: 0.85rem;
+    color: rgba(255,255,255,0.88);
+    font-size: 0.95rem;
     margin-top: 8px;
     line-height: 1.6;
-    font-weight: 300;
+    font-weight: 400;
   }
 
-  .section-body { padding: 36px 40px; }
+  .section-body { padding: 36px 44px; }
 
   /* ── FIELDS ── */
-  .field { margin-bottom: 22px; }
+  .field { margin-bottom: 24px; }
   .field:last-child { margin-bottom: 0; }
   label.field-label {
     display: block;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 7px;
-    letter-spacing: 0.03em;
+    font-size: var(--font-size-label);
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
   }
-  label.field-label .req { color: var(--gold); margin-left: 2px; }
+  label.field-label .req { color: var(--orange); margin-left: 3px; font-size: 1rem; }
 
   input[type="text"],
   input[type="email"],
@@ -256,208 +280,213 @@
   textarea,
   select {
     width: 100%;
-    padding: 12px 15px;
-    border: 1.5px solid var(--gray-200);
+    padding: 14px 16px;
+    border: 2px solid var(--gray-200);
     border-radius: var(--radius-sm);
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: var(--font-size-input);
     color: var(--gray-800);
     background: var(--gray-50);
     transition: var(--transition);
     outline: none;
     appearance: none;
+    font-weight: 500;
   }
   input:focus, textarea:focus, select:focus {
-    border-color: var(--gold);
+    border-color: var(--orange);
     background: var(--white);
-    box-shadow: 0 0 0 3px var(--gold-glow);
+    box-shadow: 0 0 0 4px var(--orange-glow);
   }
   input.error, textarea.error, select.error {
     border-color: var(--error);
     background: var(--error-bg);
   }
-  textarea { resize: vertical; min-height: 90px; }
+  textarea { resize: vertical; min-height: 100px; }
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A8E7A' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
+    background-position: right 16px center;
+    padding-right: 40px;
     cursor: pointer;
   }
 
   .field-error {
-    font-size: 0.74rem;
+    font-size: 0.84rem;
     color: var(--error);
-    margin-top: 5px;
+    margin-top: 6px;
     display: none;
-    font-weight: 500;
+    font-weight: 600;
   }
   .field-error.show { display: block; }
 
   .field-hint {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     color: var(--gray-400);
-    margin-top: 4px;
+    margin-top: 5px;
+    font-weight: 500;
   }
 
   /* ── RADIO / CHECKBOX ── */
-  .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
   .radio-group.row, .checkbox-group.row { flex-direction: row; flex-wrap: wrap; }
   .radio-opt, .check-opt {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 15px;
-    border: 1.5px solid var(--gray-200);
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 18px;
+    border: 2px solid var(--gray-200);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition);
     background: var(--gray-50);
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--gray-800);
     user-select: none;
-    font-weight: 400;
-  }
-  .radio-opt:hover, .check-opt:hover { border-color: var(--gold); background: var(--gold-pale); }
-  .radio-opt input, .check-opt input { width: 15px; height: 15px; accent-color: var(--gold); flex-shrink: 0; }
-  .radio-opt.selected, .check-opt.selected {
-    border-color: var(--gold);
-    background: var(--gold-pale);
-    color: var(--navy);
     font-weight: 500;
+    line-height: 1.4;
+  }
+  .radio-opt:hover, .check-opt:hover { border-color: var(--orange); background: var(--orange-pale); }
+  .radio-opt input, .check-opt input { width: 18px; height: 18px; accent-color: var(--orange); flex-shrink: 0; }
+  .radio-opt.selected, .check-opt.selected {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+    color: var(--dark);
+    font-weight: 600;
   }
 
   /* ── GRID ── */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-  @media (max-width: 540px) {
+  @media (max-width: 560px) {
     .two-col, .three-col { grid-template-columns: 1fr; }
   }
 
   /* ── INFO BOX ── */
   .info-box {
-    background: var(--gold-pale);
-    border: 1px solid rgba(200,149,42,0.25);
-    border-left: 4px solid var(--gold);
+    background: var(--orange-pale);
+    border: 1.5px solid rgba(232,130,10,0.3);
+    border-left: 5px solid var(--orange);
     border-radius: var(--radius-sm);
-    padding: 16px 20px;
-    font-size: 0.84rem;
-    color: var(--navy);
-    line-height: 1.65;
-    margin-bottom: 24px;
+    padding: 18px 22px;
+    font-size: 0.95rem;
+    color: var(--dark);
+    line-height: 1.7;
+    margin-bottom: 26px;
+    font-weight: 500;
   }
-  .info-box ul { padding-left: 18px; margin-top: 8px; }
-  .info-box li { margin-bottom: 5px; }
+  .info-box ul { padding-left: 20px; margin-top: 10px; }
+  .info-box li { margin-bottom: 6px; }
 
   .success-box {
     background: var(--success-bg);
-    border: 1px solid rgba(26,122,74,0.2);
-    border-left: 4px solid var(--success);
+    border: 1.5px solid rgba(26,122,74,0.25);
+    border-left: 5px solid var(--success);
     border-radius: var(--radius-sm);
     padding: 14px 18px;
-    font-size: 0.83rem;
+    font-size: 0.95rem;
     color: #155534;
     margin-bottom: 20px;
+    font-weight: 500;
   }
 
   /* ── SECTION DIVIDER ── */
   .sub-section {
-    border-top: 1px solid var(--gray-200);
-    margin: 28px 0 24px;
-    padding-top: 24px;
+    border-top: 2px solid var(--gray-100);
+    margin: 30px 0 26px;
+    padding-top: 26px;
   }
   .sub-section-title {
-    font-size: 0.72rem;
-    font-weight: 700;
+    font-size: 0.78rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--navy-light);
-    margin-bottom: 18px;
+    letter-spacing: 0.16em;
+    color: var(--orange-dark);
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
   .sub-section-title::after {
     content: '';
     flex: 1;
-    height: 1px;
-    background: var(--gray-200);
+    height: 2px;
+    background: var(--gray-100);
   }
 
   /* ── BENEFICIARIES ── */
   .beneficiary-card {
-    border: 1.5px solid var(--gray-200);
+    border: 2px solid var(--gray-200);
     border-radius: var(--radius);
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     overflow: hidden;
     transition: border-color var(--transition);
   }
-  .beneficiary-card:focus-within { border-color: var(--gold); }
+  .beneficiary-card:focus-within { border-color: var(--orange); }
   .beneficiary-header {
-    background: linear-gradient(90deg, var(--navy), var(--navy-mid));
-    padding: 12px 18px;
+    background: linear-gradient(90deg, var(--orange-dark), var(--orange));
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   .beneficiary-title {
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--gold-light);
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: 'Merriweather', serif;
+    color: var(--white);
+    font-size: 1.05rem;
+    font-weight: 700;
   }
   .btn-remove {
-    background: rgba(192,57,43,0.18);
-    border: 1px solid rgba(192,57,43,0.35);
-    color: #F08070;
+    background: rgba(255,255,255,0.2);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: var(--white);
     border-radius: 6px;
-    padding: 4px 12px;
-    font-size: 0.75rem;
+    padding: 5px 14px;
+    font-size: 0.82rem;
     cursor: pointer;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
     transition: var(--transition);
   }
-  .btn-remove:hover { background: rgba(192,57,43,0.35); color: #FF8070; }
-  .beneficiary-body { padding: 18px 20px; }
+  .btn-remove:hover { background: rgba(255,255,255,0.35); }
+  .beneficiary-body { padding: 20px 22px; }
 
   /* ── PCT SUMMARY ── */
   .pct-summary {
     background: var(--gray-50);
-    border: 1.5px solid var(--gray-200);
+    border: 2px solid var(--gray-200);
     border-radius: var(--radius-sm);
-    padding: 16px 20px;
-    margin-top: 8px;
+    padding: 18px 22px;
+    margin-top: 10px;
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: 22px;
     flex-wrap: wrap;
   }
-  .pct-label { font-size: 0.72rem; color: var(--gray-600); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .pct-label { font-size: 0.76rem; color: var(--gray-600); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
   .pct-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: 'Merriweather', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
     line-height: 1;
     transition: color var(--transition);
   }
   .pct-value.ok { color: var(--success); }
-  .pct-value.warn { color: var(--gold); }
+  .pct-value.warn { color: var(--orange); }
   .pct-value.over { color: var(--error); }
   .pct-right { flex: 1; min-width: 140px; }
-  .pct-bar-wrap { height: 7px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+  .pct-bar-wrap { height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
   .pct-bar-fill { height: 100%; border-radius: 4px; transition: width 0.35s cubic-bezier(0.4,0,0.2,1), background 0.3s; }
   .pct-bar-fill.ok { background: var(--success); }
-  .pct-bar-fill.warn { background: var(--gold); }
+  .pct-bar-fill.warn { background: var(--orange); }
   .pct-bar-fill.over { background: var(--error); }
-  .pct-msg { font-size: 0.76rem; font-weight: 500; }
+  .pct-msg { font-size: 0.88rem; font-weight: 600; }
   .pct-msg.ok { color: var(--success); }
-  .pct-msg.warn { color: var(--gold); }
+  .pct-msg.warn { color: var(--orange-dark); }
   .pct-msg.over { color: var(--error); }
 
   /* ── FILE UPLOAD ── */
   .file-drop {
-    border: 2px dashed var(--gray-200);
+    border: 2.5px dashed var(--gray-200);
     border-radius: var(--radius-sm);
-    padding: 24px;
+    padding: 28px;
     text-align: center;
     cursor: pointer;
     transition: var(--transition);
@@ -465,8 +494,8 @@
     position: relative;
   }
   .file-drop:hover, .file-drop.dragover {
-    border-color: var(--gold);
-    background: var(--gold-pale);
+    border-color: var(--orange);
+    background: var(--orange-pale);
   }
   .file-drop input[type="file"] {
     position: absolute;
@@ -480,33 +509,33 @@
     background: transparent;
     box-shadow: none;
   }
-  .file-drop-icon { font-size: 1.8rem; margin-bottom: 8px; }
-  .file-drop-text { font-size: 0.85rem; color: var(--gray-600); }
-  .file-drop-text strong { color: var(--gold); }
-  .file-drop-hint { font-size: 0.72rem; color: var(--gray-400); margin-top: 4px; }
+  .file-drop-icon { font-size: 2rem; margin-bottom: 10px; }
+  .file-drop-text { font-size: 0.95rem; color: var(--gray-600); font-weight: 500; }
+  .file-drop-text strong { color: var(--orange-dark); }
+  .file-drop-hint { font-size: 0.82rem; color: var(--gray-400); margin-top: 6px; font-weight: 500; }
 
-  .file-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .file-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
   .file-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: var(--white);
-    border: 1.5px solid var(--gray-200);
+    border: 2px solid var(--gray-200);
     border-radius: 8px;
-    padding: 9px 14px;
-    font-size: 0.82rem;
+    padding: 11px 16px;
+    font-size: 0.92rem;
   }
-  .file-icon { font-size: 1.1rem; flex-shrink: 0; }
-  .file-name { flex: 1; color: var(--navy); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .file-size { color: var(--gray-400); font-size: 0.72rem; flex-shrink: 0; }
+  .file-icon { font-size: 1.2rem; flex-shrink: 0; }
+  .file-name { flex: 1; color: var(--dark); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-size { color: var(--gray-400); font-size: 0.78rem; flex-shrink: 0; font-weight: 500; }
   .file-remove {
     color: var(--error);
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     background: none;
     border: none;
     font-weight: 700;
-    padding: 2px 6px;
+    padding: 3px 8px;
     border-radius: 4px;
     transition: var(--transition);
   }
@@ -514,77 +543,78 @@
 
   /* ── BUTTONS ── */
   .btn-add {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; gap: 10px;
     background: transparent;
-    border: 2px dashed var(--gold);
-    color: var(--gold);
+    border: 2.5px dashed var(--orange);
+    color: var(--orange-dark);
     border-radius: var(--radius-sm);
-    padding: 11px 20px;
-    font-size: 0.86rem;
-    font-weight: 600;
+    padding: 13px 22px;
+    font-size: 0.95rem;
+    font-weight: 700;
     cursor: pointer;
     width: 100%;
     justify-content: center;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     transition: var(--transition);
-    margin-top: 6px;
+    margin-top: 8px;
   }
-  .btn-add:hover { background: var(--gold-pale); }
+  .btn-add:hover { background: var(--orange-pale); }
 
   .nav-buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px 30px;
-    border-top: 1px solid var(--gray-200);
-    gap: 12px;
+    padding: 22px 44px 32px;
+    border-top: 2px solid var(--gray-100);
+    gap: 14px;
     background: var(--gray-50);
   }
   .btn-back, .btn-next, .btn-submit {
-    padding: 12px 28px;
+    padding: 14px 32px;
     border-radius: var(--radius-sm);
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
     border: none;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
   }
   .btn-back {
     background: var(--white);
     color: var(--gray-600);
-    border: 1.5px solid var(--gray-200);
+    border: 2px solid var(--gray-200);
   }
   .btn-back:hover { background: var(--gray-100); color: var(--gray-800); border-color: var(--gray-400); }
   .btn-back:disabled { opacity: 0.35; cursor: not-allowed; }
   .btn-next, .btn-submit {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    color: var(--navy);
-    box-shadow: 0 4px 16px rgba(200,149,42,0.3);
-    font-weight: 700;
+    background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange-light) 100%);
+    color: var(--white);
+    box-shadow: 0 4px 18px rgba(232,130,10,0.35);
+    font-weight: 800;
+    font-size: 1.05rem;
   }
   .btn-next:hover, .btn-submit:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(200,149,42,0.42);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(232,130,10,0.45);
   }
-  .btn-submit { padding: 13px 36px; }
+  .btn-submit { padding: 15px 40px; }
 
   /* ── SUCCESS SCREEN ── */
   .success-screen {
     display: none;
     text-align: center;
-    padding: 70px 40px 60px;
+    padding: 70px 44px 60px;
   }
   .success-screen.show { display: block; }
   .success-ring {
-    width: 80px; height: 80px;
+    width: 88px; height: 88px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background: linear-gradient(135deg, var(--orange-dark), var(--orange-light));
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 28px;
-    font-size: 2.2rem;
-    box-shadow: 0 8px 32px rgba(200,149,42,0.3);
+    margin: 0 auto 30px;
+    font-size: 2.4rem;
+    box-shadow: 0 8px 32px rgba(232,130,10,0.35);
     animation: popIn 0.5s cubic-bezier(0.4,0,0.2,1);
   }
   @keyframes popIn {
@@ -592,22 +622,23 @@
     to   { transform: scale(1); opacity: 1; }
   }
   .success-screen h2 {
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--navy);
-    font-size: 2rem;
-    margin-bottom: 14px;
+    font-family: 'Merriweather', serif;
+    color: var(--dark);
+    font-size: 2.1rem;
+    margin-bottom: 16px;
+    font-weight: 900;
   }
-  .success-screen p { color: var(--gray-600); line-height: 1.7; font-size: 0.95rem; }
+  .success-screen p { color: var(--gray-600); line-height: 1.8; font-size: 1.05rem; font-weight: 500; }
   .success-ref {
     display: inline-block;
-    background: var(--gold-pale);
-    border: 1px solid rgba(200,149,42,0.3);
-    border-radius: 8px;
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 0.8rem;
-    color: var(--navy);
-    font-weight: 500;
+    background: var(--orange-pale);
+    border: 2px solid rgba(232,130,10,0.3);
+    border-radius: 10px;
+    padding: 12px 24px;
+    margin-top: 22px;
+    font-size: 0.92rem;
+    color: var(--dark);
+    font-weight: 700;
   }
 
   /* ── LOADING ── */
@@ -615,91 +646,62 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(26,39,68,0.75);
+    background: rgba(26,18,8,0.7);
     backdrop-filter: blur(4px);
     z-index: 999;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
   }
   .loading-overlay.show { display: flex; }
   .spinner {
-    width: 52px; height: 52px;
-    border: 4px solid rgba(200,149,42,0.2);
-    border-top-color: var(--gold-light);
+    width: 56px; height: 56px;
+    border: 5px solid rgba(232,130,10,0.2);
+    border-top-color: var(--orange-light);
     border-radius: 50%;
     animation: spin 0.85s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-overlay p { color: rgba(255,255,255,0.85); font-size: 0.9rem; letter-spacing: 0.04em; }
+  .loading-overlay p { color: rgba(255,255,255,0.92); font-size: 1rem; letter-spacing: 0.04em; font-weight: 600; }
 
   /* ── RESUMEN ── */
-  .resumen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .resumen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .resumen-item {
     background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    padding: 12px 15px;
-  }
-  .resumen-key { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); font-weight: 600; margin-bottom: 3px; }
-  .resumen-val { font-size: 0.88rem; color: var(--navy); font-weight: 500; }
-  .resumen-ben {
-    background: var(--gold-pale);
-    border: 1px solid rgba(200,149,42,0.2);
+    border: 1.5px solid var(--gray-200);
     border-radius: 8px;
     padding: 14px 16px;
-    margin-top: 12px;
   }
-  .resumen-ben-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
-  .ben-resumen-row { display: flex; justify-content: space-between; font-size: 0.84rem; padding: 4px 0; border-bottom: 1px solid rgba(200,149,42,0.1); }
+  .resumen-key { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray-400); font-weight: 700; margin-bottom: 4px; }
+  .resumen-val { font-size: 0.96rem; color: var(--dark); font-weight: 600; }
+  .resumen-ben {
+    background: var(--orange-pale);
+    border: 1.5px solid rgba(232,130,10,0.25);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 14px;
+  }
+  .resumen-ben-title { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--orange-dark); font-weight: 800; margin-bottom: 12px; }
+  .ben-resumen-row { display: flex; justify-content: space-between; font-size: 0.92rem; padding: 5px 0; border-bottom: 1px solid rgba(232,130,10,0.12); font-weight: 500; }
   .ben-resumen-row:last-child { border-bottom: none; }
   @media (max-width: 500px) {
     .resumen-grid { grid-template-columns: 1fr; }
   }
 
-  /* ── TOOLTIP ── */
-  .tooltip-wrap { position: relative; display: inline-block; margin-left: 6px; }
-  .tooltip-icon {
-    width: 16px; height: 16px;
-    background: var(--gray-200);
-    color: var(--gray-600);
-    border-radius: 50%;
-    font-size: 0.65rem;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: help;
-    vertical-align: middle;
-  }
-  .tooltip-text {
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--navy);
-    color: var(--white);
-    font-size: 0.72rem;
-    padding: 8px 12px;
-    border-radius: 7px;
-    width: 180px;
-    line-height: 1.5;
-    z-index: 50;
-    pointer-events: none;
-    font-weight: 400;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-  .tooltip-wrap:hover .tooltip-text { display: block; }
-
   /* responsive */
   @media (max-width: 560px) {
     .section-body, .nav-buttons { padding-left: 20px; padding-right: 20px; }
     .section-header { padding: 24px 20px 20px; }
-    .section-title { font-size: 1.4rem; }
+    .section-title { font-size: 1.5rem; }
   }
   .hidden { display: none !important; }
+
+  /* Accessibility: focus visible */
+  *:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+  }
 </style>
 </head>
 <body>
@@ -712,8 +714,11 @@
 <!-- HEADER -->
 <header class="site-header">
   <div class="logo-box">
-    <div class="logo-name">CORPASEGO</div>
-    <div class="logo-sub">Broker de Seguros · Cia. Ltda.</div>
+    <div class="logo-emblem">🛡️</div>
+    <div class="logo-text">
+      <div class="logo-name">CORPASEGO</div>
+      <div class="logo-sub">Broker de Seguros · Cia. Ltda.</div>
+    </div>
   </div>
   <div class="header-tagline">Asesora Productora de Seguros</div>
 </header>
@@ -749,15 +754,15 @@
         <div class="info-box">
           <strong>Antes de comenzar, tenga en cuenta:</strong>
           <ul>
-            <li>Este formulario tiene <strong>9 secciones</strong>. Puede regresar a corregir en cualquier momento.</li>
-            <li>Los campos con <span style="color:var(--gold)">✦</span> son obligatorios.</li>
-            <li>Necesitará adjuntar documentos al final (cédula, planilla de servicios, RUC).</li>
+            <li>Este formulario tiene <strong>8 secciones</strong>. Puede regresar a corregir en cualquier momento.</li>
+            <li>Los campos con <span style="color:var(--orange)">✦</span> son obligatorios.</li>
+            <li>Necesitará adjuntar documentos (cédula, planilla de servicios, RUC).</li>
             <li>Los porcentajes de sus beneficiarios deben sumar exactamente <strong>100%</strong>.</li>
             <li>La información será enviada de forma segura a CORPASEGO.</li>
           </ul>
         </div>
         <div style="text-align:center;padding:10px 0 4px;">
-          <div style="font-size:0.8rem;color:var(--gray-400);">Tiempo estimado de llenado: <strong style="color:var(--navy)">10–15 minutos</strong></div>
+          <div style="font-size:0.92rem;color:var(--gray-600);font-weight:500;">Tiempo estimado de llenado: <strong style="color:var(--dark)">10–15 minutos</strong></div>
         </div>
       </div>
     </div>
@@ -765,20 +770,20 @@
     <!-- ═══ STEP 1: IDENTIFICACIÓN ═══ -->
     <div class="form-step hidden" id="step-1">
       <div class="section-header">
-        <div class="section-number">Sección 1 de 9 · Identificación</div>
+        <div class="section-number">Sección 1 de 8 · Identificación</div>
         <div class="section-title">Documento de Identidad</div>
       </div>
       <div class="section-body">
         <div class="field">
           <label class="field-label">Tipo de Documento <span class="req">✦</span></label>
           <div class="radio-group row" id="tipoDocGroup">
-  <label class="radio-opt" onclick="selectRadio('tipoDoc','cedula',this);toggleField('fieldCedula',true);toggleField('fieldPasaporte',false)">
-    <input type="radio" name="tipoDoc" value="cedula"> Cédula de Identidad
-  </label>
-  <label class="radio-opt" onclick="selectRadio('tipoDoc','pasaporte',this);toggleField('fieldCedula',false);toggleField('fieldPasaporte',true)">
-    <input type="radio" name="tipoDoc" value="pasaporte"> Pasaporte
-  </label>
-</div>
+            <label class="radio-opt" onclick="selectRadio('tipoDoc','cedula',this);toggleField('fieldCedula',true);toggleField('fieldPasaporte',false)">
+              <input type="radio" name="tipoDoc" value="cedula"> Cédula de Identidad
+            </label>
+            <label class="radio-opt" onclick="selectRadio('tipoDoc','pasaporte',this);toggleField('fieldCedula',false);toggleField('fieldPasaporte',true)">
+              <input type="radio" name="tipoDoc" value="pasaporte"> Pasaporte
+            </label>
+          </div>
           <div class="field-error" id="err-tipoDoc">Seleccione el tipo de documento.</div>
         </div>
 
@@ -800,7 +805,7 @@
     <!-- ═══ STEP 2: DATOS PERSONALES ═══ -->
     <div class="form-step hidden" id="step-2">
       <div class="section-header">
-        <div class="section-number">Sección 2 de 9 · Datos Personales</div>
+        <div class="section-number">Sección 2 de 8 · Datos Personales</div>
         <div class="section-title">Información Personal</div>
       </div>
       <div class="section-body">
@@ -899,19 +904,20 @@
             <div class="field-error" id="err-estatura">Ingrese una estatura válida (ej: 1.70).</div>
           </div>
           <div class="field">
-            <label class="field-label" for="peso">Peso (kg) <span class="req">✦</span></label>
-            <input type="number" id="peso" placeholder="70" min="20" max="300">
-            <div class="field-error" id="err-peso">Ingrese un peso válido.</div>
+            <label class="field-label" for="peso">Peso (libras) <span class="req">✦</span></label>
+            <input type="number" id="peso" placeholder="154" min="44" max="660">
+            <div class="field-error" id="err-peso">Ingrese un peso válido en libras.</div>
+            <div class="field-hint">Ejemplo: 154 libras = 70 kg</div>
           </div>
         </div>
-        <div id="imcDisplay" class="hidden" style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:12px 16px;font-size:0.82rem;color:var(--gray-600);margin-top:-8px;"></div>
+        <div id="imcDisplay" class="hidden" style="background:var(--gray-50);border:2px solid var(--gray-200);border-radius:8px;padding:14px 18px;font-size:0.92rem;color:var(--gray-600);margin-top:-10px;font-weight:500;"></div>
       </div>
     </div>
 
     <!-- ═══ STEP 3: SALUD ═══ -->
     <div class="form-step hidden" id="step-3">
       <div class="section-header">
-        <div class="section-number">Sección 3 de 9 · Salud</div>
+        <div class="section-number">Sección 3 de 8 · Salud</div>
         <div class="section-title">Estado de Salud</div>
         <div class="section-subtitle">Responda con honestidad. Esta información es confidencial y requerida para su póliza.</div>
       </div>
@@ -1014,7 +1020,7 @@
     <!-- ═══ STEP 4: OCUPACIÓN ═══ -->
     <div class="form-step hidden" id="step-4">
       <div class="section-header">
-        <div class="section-number">Sección 4 de 9 · Actividad Económica</div>
+        <div class="section-number">Sección 4 de 8 · Actividad Económica</div>
         <div class="section-title">Ocupación e Ingresos</div>
       </div>
       <div class="section-body">
@@ -1082,27 +1088,13 @@
           </div>
           <div class="field-error" id="err-impuesto">Seleccione una opción.</div>
         </div>
-        <div class="field">
-          <label class="field-label">¿Tiene o ha tenido otro seguro de vida? <span class="req">✦</span></label>
-          <div class="radio-group row" id="otroSeguroGroup">
-            <label class="radio-opt" onclick="selectRadio('otroSeguro','si',this);toggleField('fieldOtroSeguro',true)"><input type="radio" name="otroSeguro" value="si"> Sí</label>
-            <label class="radio-opt" onclick="selectRadio('otroSeguro','no',this);toggleField('fieldOtroSeguro',false)"><input type="radio" name="otroSeguro" value="no"> No</label>
-          </div>
-          <div class="field-error" id="err-otroSeguro">Seleccione una opción.</div>
-        </div>
-        <div class="hidden" id="fieldOtroSeguro">
-          <div class="field">
-            <label class="field-label" for="detOtroSeguro">¿Con qué aseguradora y monto asegurado? <span class="req">✦</span></label>
-            <input type="text" id="detOtroSeguro" placeholder="Ej: Equivida, $50,000">
-          </div>
-        </div>
       </div>
     </div>
 
     <!-- ═══ STEP 5: PAGO ═══ -->
     <div class="form-step hidden" id="step-5">
       <div class="section-header">
-        <div class="section-number">Sección 5 de 9 · Forma de Pago</div>
+        <div class="section-number">Sección 5 de 8 · Forma de Pago</div>
         <div class="section-title">Información de Pago</div>
       </div>
       <div class="section-body">
@@ -1139,23 +1131,13 @@
             </div>
           </div>
         </div>
-        <div class="field">
-          <label class="field-label">Frecuencia de pago de la prima <span class="req">✦</span></label>
-          <div class="radio-group row" id="frecPrimaGroup">
-            <label class="radio-opt" onclick="selectRadio('frecPrima','mensual',this)"><input type="radio" name="frecPrima" value="mensual"> Mensual</label>
-            <label class="radio-opt" onclick="selectRadio('frecPrima','trimestral',this)"><input type="radio" name="frecPrima" value="trimestral"> Trimestral</label>
-            <label class="radio-opt" onclick="selectRadio('frecPrima','semestral',this)"><input type="radio" name="frecPrima" value="semestral"> Semestral</label>
-            <label class="radio-opt" onclick="selectRadio('frecPrima','anual',this)"><input type="radio" name="frecPrima" value="anual"> Anual</label>
-          </div>
-          <div class="field-error" id="err-frecPrima">Seleccione la frecuencia de pago.</div>
-        </div>
       </div>
     </div>
 
     <!-- ═══ STEP 6: DOCUMENTOS ═══ -->
     <div class="form-step hidden" id="step-6">
       <div class="section-header">
-        <div class="section-number">Sección 6 de 9 · Documentos</div>
+        <div class="section-number">Sección 6 de 8 · Documentos</div>
         <div class="section-title">Documentos Requeridos</div>
         <div class="section-subtitle">Adjunte los documentos necesarios para la emisión de su póliza.</div>
       </div>
@@ -1187,16 +1169,16 @@
     <!-- ═══ STEP 7: BENEFICIARIOS ═══ -->
     <div class="form-step hidden" id="step-7">
       <div class="section-header">
-        <div class="section-number">Sección 7 de 9 · Beneficiarios</div>
+        <div class="section-number">Sección 7 de 8 · Beneficiarios</div>
         <div class="section-title">Beneficiarios del Seguro</div>
         <div class="section-subtitle">El porcentaje total de todos los beneficiarios debe sumar exactamente 100%.</div>
       </div>
       <div class="section-body">
         <div id="beneficiariosList"></div>
         <button class="btn-add" onclick="addBeneficiary()">
-          <span style="font-size:1.1rem">＋</span> Agregar otro beneficiario
+          <span style="font-size:1.2rem">＋</span> Agregar otro beneficiario
         </button>
-        <div class="pct-summary" style="margin-top:20px;">
+        <div class="pct-summary" style="margin-top:22px;">
           <div>
             <div class="pct-label">Total asignado</div>
             <div class="pct-value warn" id="pctValue">0%</div>
@@ -1208,66 +1190,20 @@
             <div class="pct-msg warn" id="pctMsg">Agregue beneficiarios y asigne el 100%</div>
           </div>
         </div>
-        <div class="field-error" id="err-beneficiarios" style="margin-top:8px;"></div>
+        <div class="field-error" id="err-beneficiarios" style="margin-top:10px;"></div>
       </div>
     </div>
 
-    <!-- ═══ STEP 8: PERSONA EXPUESTA (PEP) ═══ -->
+    <!-- ═══ STEP 8: CONFIRMACIÓN ═══ -->
     <div class="form-step hidden" id="step-8">
       <div class="section-header">
-        <div class="section-number">Sección 8 de 9 · Declaración PEP</div>
-        <div class="section-title">Persona Expuesta Políticamente</div>
-        <div class="section-subtitle">Requerido por la normativa ecuatoriana de prevención de lavado de activos.</div>
-      </div>
-      <div class="section-body">
-        <div class="info-box">
-          Una <strong>Persona Expuesta Políticamente (PEP)</strong> es aquella que desempeña o ha desempeñado en los últimos 2 años funciones públicas de alto nivel: presidente, ministros, alcaldes, jueces, militares de alto rango, directivos de empresas estatales, entre otros.
-        </div>
-        <div class="field">
-          <label class="field-label">¿Es usted una Persona Expuesta Políticamente (PEP)? <span class="req">✦</span></label>
-          <div class="radio-group row" id="pepGroup">
-            <label class="radio-opt" onclick="selectRadio('pep','si',this);toggleField('fieldPep',true)"><input type="radio" name="pep" value="si"> Sí</label>
-            <label class="radio-opt" onclick="selectRadio('pep','no',this);toggleField('fieldPep',false)"><input type="radio" name="pep" value="no"> No</label>
-          </div>
-          <div class="field-error" id="err-pep">Seleccione una opción.</div>
-        </div>
-        <div class="hidden" id="fieldPep">
-          <div class="field">
-            <label class="field-label" for="detPep">Cargo o función que desempeña/desempeñó <span class="req">✦</span></label>
-            <input type="text" id="detPep" placeholder="Ej: Concejal del Municipio de Guayaquil">
-          </div>
-          <div class="field">
-            <label class="field-label" for="instPep">Institución <span class="req">✦</span></label>
-            <input type="text" id="instPep" placeholder="Ej: Municipio de Guayaquil">
-          </div>
-        </div>
-        <div class="field">
-          <label class="field-label">¿Tiene un familiar cercano que sea PEP? <span class="req">✦</span></label>
-          <div class="radio-group row" id="famPepGroup">
-            <label class="radio-opt" onclick="selectRadio('famPep','si',this);toggleField('fieldFamPep',true)"><input type="radio" name="famPep" value="si"> Sí</label>
-            <label class="radio-opt" onclick="selectRadio('famPep','no',this);toggleField('fieldFamPep',false)"><input type="radio" name="famPep" value="no"> No</label>
-          </div>
-          <div class="field-error" id="err-famPep">Seleccione una opción.</div>
-        </div>
-        <div class="hidden" id="fieldFamPep">
-          <div class="field">
-            <label class="field-label" for="detFamPep">Nombre, parentesco y cargo del familiar <span class="req">✦</span></label>
-            <textarea id="detFamPep" placeholder="Ej: Juan Gómez (padre) - Prefecto de El Oro" style="min-height:70px;"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ STEP 9: CONFIRMACIÓN ═══ -->
-    <div class="form-step hidden" id="step-9">
-      <div class="section-header">
-        <div class="section-number">Sección 9 de 9 · Confirmación</div>
+        <div class="section-number">Sección 8 de 8 · Confirmación</div>
         <div class="section-title">Revise y Envíe</div>
         <div class="section-subtitle">Verifique que toda la información sea correcta antes de enviar.</div>
       </div>
       <div class="section-body">
         <div id="resumenFinal"></div>
-        <div class="field" style="margin-top:20px;">
+        <div class="field" style="margin-top:22px;">
           <label class="check-opt" id="labelAcepto" onclick="toggleAcepto()">
             <input type="checkbox" id="checkAcepto" style="pointer-events:none">
             Declaro que toda la información proporcionada es verdadera y autorizo a CORPASEGO a verificarla para los fines del seguro de vida solicitado.
@@ -1295,11 +1231,9 @@
 
 <script>
 // ─────────────────────────────────────────────
-// CONFIGURACIÓN — reemplaza con tu URL de Apps Script
+const APPS_SCRIPT_URL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
 // ─────────────────────────────────────────────
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOrbACm2CbqYBr0AVGYTmwRCGKj06rQcQ9_qrmWJEIwBpTOpPMA2i_IEoNYQPoZiTx/exec';
 
-// ─────────────────────────────────────────────
 const STEPS = [
   { label: 'Inicio' },
   { label: 'ID' },
@@ -1309,7 +1243,6 @@ const STEPS = [
   { label: 'Pago' },
   { label: 'Docs' },
   { label: 'Beneficiarios' },
-  { label: 'PEP' },
   { label: 'Confirmar' },
 ];
 
@@ -1317,20 +1250,16 @@ let currentStep = 0;
 let beneficiaryCount = 0;
 let selectedFiles = [];
 
-// ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   buildProgress();
   updateProgress();
   addBeneficiary();
-  // max fecha de nacimiento = hoy
   document.getElementById('fechaNac').max = new Date().toISOString().split('T')[0];
-  // IMC en tiempo real
   ['estatura','peso'].forEach(id => {
     document.getElementById(id).addEventListener('input', updateIMC);
   });
 });
 
-// ── PROGRESS ──
 function buildProgress() {
   document.getElementById('progressSteps').innerHTML = STEPS.map((s, i) => `
     <div class="step-dot ${i===0?'active':''}" id="sdot-${i}">
@@ -1354,7 +1283,6 @@ function updateProgress() {
   btn.className = isLast ? 'btn-submit' : 'btn-next';
 }
 
-// ── HELPERS ──
 function selectRadio(name, value, el) {
   document.querySelectorAll(`[name="${name}"]`).forEach(r => r.closest('.radio-opt').classList.remove('selected'));
   el.classList.add('selected');
@@ -1383,7 +1311,6 @@ function clearErr(id) {
   if (el) el.classList.remove('error');
 }
 
-// ── CEDULA VALIDATION (Módulo 10 Ecuador) ──
 function validateCedula(cedula) {
   if (!/^\d{10}$/.test(cedula)) return false;
   const prov = parseInt(cedula.substring(0, 2));
@@ -1400,26 +1327,25 @@ function validateCedula(cedula) {
   return check === verifier;
 }
 
-// ── IMC ──
 function updateIMC() {
   const h = parseFloat(document.getElementById('estatura').value);
-  const w = parseFloat(document.getElementById('peso').value);
+  const lbs = parseFloat(document.getElementById('peso').value);
   const box = document.getElementById('imcDisplay');
-  if (h > 0.5 && w > 0) {
-    const imc = w / (h * h);
+  if (h > 0.5 && lbs > 0) {
+    const kg = lbs * 0.453592;
+    const imc = kg / (h * h);
     let cat = '', color = '';
     if (imc < 18.5) { cat = 'Bajo peso'; color = '#E67E22'; }
     else if (imc < 25) { cat = 'Normal'; color = 'var(--success)'; }
     else if (imc < 30) { cat = 'Sobrepeso'; color = '#E67E22'; }
     else { cat = 'Obesidad'; color = 'var(--error)'; }
-    box.innerHTML = `IMC calculado: <strong style="color:${color}">${imc.toFixed(1)} — ${cat}</strong>`;
+    box.innerHTML = `Peso en kg: <strong>${kg.toFixed(1)} kg</strong> · IMC: <strong style="color:${color}">${imc.toFixed(1)} — ${cat}</strong>`;
     box.classList.remove('hidden');
   } else {
     box.classList.add('hidden');
   }
 }
 
-// ── FILE HANDLING ──
 function handleDragOver(e) {
   e.preventDefault();
   document.getElementById('fileDrop').classList.add('dragover');
@@ -1438,17 +1364,9 @@ function handleFileSelect(e) {
 function processFiles(files) {
   const allowed = ['application/pdf','image/jpeg','image/jpg','image/png'];
   files.forEach(f => {
-    if (!allowed.includes(f.type)) {
-      alert(`Archivo no permitido: ${f.name}. Solo PDF, JPG o PNG.`);
-      return;
-    }
-    if (f.size > 10 * 1024 * 1024) {
-      alert(`El archivo ${f.name} supera los 10 MB.`);
-      return;
-    }
-    if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) {
-      selectedFiles.push(f);
-    }
+    if (!allowed.includes(f.type)) { alert(`Archivo no permitido: ${f.name}. Solo PDF, JPG o PNG.`); return; }
+    if (f.size > 10 * 1024 * 1024) { alert(`El archivo ${f.name} supera los 10 MB.`); return; }
+    if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) selectedFiles.push(f);
   });
   renderFileList();
   if (selectedFiles.length > 0) hideErr('err-archivos');
@@ -1462,18 +1380,16 @@ function renderFileList() {
   if (selectedFiles.length === 0) { list.innerHTML = ''; return; }
   list.innerHTML = selectedFiles.map((f, i) => {
     const icon = f.type === 'application/pdf' ? '📄' : '🖼️';
-    const size = f.size < 1024 * 1024 ? `${(f.size/1024).toFixed(0)} KB` : `${(f.size/1024/1024).toFixed(1)} MB`;
-    return `
-      <div class="file-item">
-        <span class="file-icon">${icon}</span>
-        <span class="file-name">${f.name}</span>
-        <span class="file-size">${size}</span>
-        <button class="file-remove" onclick="removeFile(${i})" title="Eliminar">✕</button>
-      </div>`;
+    const size = f.size < 1024*1024 ? `${(f.size/1024).toFixed(0)} KB` : `${(f.size/1024/1024).toFixed(1)} MB`;
+    return `<div class="file-item">
+      <span class="file-icon">${icon}</span>
+      <span class="file-name">${f.name}</span>
+      <span class="file-size">${size}</span>
+      <button class="file-remove" onclick="removeFile(${i})" title="Eliminar">✕</button>
+    </div>`;
   }).join('');
 }
 
-// ── BENEFICIARIOS ──
 function addBeneficiary() {
   beneficiaryCount++;
   const n = beneficiaryCount;
@@ -1505,6 +1421,7 @@ function addBeneficiary() {
         <div class="field">
           <label class="field-label">Cédula <span class="req">✦</span></label>
           <input type="text" class="ben-cedula" placeholder="0912345678" maxlength="10" inputmode="numeric">
+          <div class="field-error ben-cedula-err"></div>
         </div>
         <div class="field">
           <label class="field-label">Fecha de Nacimiento <span class="req">✦</span></label>
@@ -1515,13 +1432,15 @@ function addBeneficiary() {
         <div class="field">
           <label class="field-label">Correo Electrónico <span class="req">✦</span></label>
           <input type="email" class="ben-email" placeholder="correo@ejemplo.com">
+          <div class="field-error ben-email-err"></div>
         </div>
         <div class="field">
           <label class="field-label">Teléfono <span class="req">✦</span></label>
-          <input type="tel" class="ben-tel" placeholder="0991234567">
+          <input type="tel" class="ben-tel" placeholder="0991234567" maxlength="10" inputmode="numeric">
+          <div class="field-error ben-tel-err"></div>
         </div>
       </div>
-      <div class="field" style="max-width:200px;">
+      <div class="field" style="max-width:220px;">
         <label class="field-label">Porcentaje (%) <span class="req">✦</span></label>
         <input type="number" class="ben-pct" placeholder="Ej: 50" min="1" max="100" oninput="updatePctDisplay()">
       </div>
@@ -1562,7 +1481,6 @@ function updatePctDisplay() {
   else pctMsg.textContent = `Faltan ${(100-total).toFixed(2)}% para completar el 100%.`;
 }
 
-// ── CHECKBOXES ──
 function toggleAcepto() {
   const cb = document.getElementById('checkAcepto');
   const lbl = document.getElementById('labelAcepto');
@@ -1578,16 +1496,6 @@ function toggleDatos() {
   if (cb.checked) hideErr('err-datos');
 }
 
-// ── TIPO DOC TOGGLE ──
-document.addEventListener('change', e => {
-  if (e.target.name === 'tipoDoc') {
-    const isCed = e.target.value === 'cedula';
-    document.getElementById('fieldCedula').classList.toggle('hidden', !isCed);
-    document.getElementById('fieldPasaporte').classList.toggle('hidden', isCed);
-  }
-});
-
-// ── VALIDATION ──
 function validateStep(step) {
   let ok = true;
 
@@ -1609,33 +1517,22 @@ function validateStep(step) {
   }
 
   if (step === 2) {
-    const fields = [
-      { id:'nombres', msg:'Ingrese sus nombres completos.' },
-      { id:'fechaNac', msg:'Ingrese su fecha de nacimiento.' },
-      { id:'telefono', msg:'Ingrese su número de teléfono.' },
-      { id:'direccion', msg:'Ingrese su dirección de domicilio.' },
-      { id:'ciudad', msg:'Ingrese su ciudad.' },
-      { id:'nacionalidad', msg:'Ingrese su nacionalidad.' },
-    ];
-    fields.forEach(f => {
-      const v = document.getElementById(f.id).value.trim();
-      if (!v) { showErr('err-'+f.id, f.msg); markErr(f.id); ok = false; }
-      else { hideErr('err-'+f.id); clearErr(f.id); }
+    ['nombres','fechaNac','telefono','direccion','ciudad','nacionalidad'].forEach(id => {
+      const v = document.getElementById(id).value.trim();
+      if (!v) { showErr('err-'+id); markErr(id); ok = false; }
+      else { hideErr('err-'+id); clearErr(id); }
     });
     const email = document.getElementById('email').value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err-email','Ingrese un correo válido.'); markErr('email'); ok = false; }
     else { hideErr('err-email'); clearErr('email'); }
-    if (!document.getElementById('estadoCivil').value) { showErr('err-estadoCivil','Seleccione su estado civil.'); ok = false; }
-    else hideErr('err-estadoCivil');
-    if (!document.getElementById('genero').value) { showErr('err-genero','Seleccione su género.'); ok = false; }
-    else hideErr('err-genero');
-    if (!document.getElementById('provincia').value) { showErr('err-provincia','Seleccione su provincia.'); ok = false; }
-    else hideErr('err-provincia');
+    if (!document.getElementById('estadoCivil').value) { showErr('err-estadoCivil'); ok = false; } else hideErr('err-estadoCivil');
+    if (!document.getElementById('genero').value) { showErr('err-genero'); ok = false; } else hideErr('err-genero');
+    if (!document.getElementById('provincia').value) { showErr('err-provincia'); ok = false; } else hideErr('err-provincia');
     const est = parseFloat(document.getElementById('estatura').value);
     if (!est || est < 1 || est > 2.5) { showErr('err-estatura','Ingrese una estatura válida (ej: 1.70).'); markErr('estatura'); ok = false; }
     else { hideErr('err-estatura'); clearErr('estatura'); }
-    const pes = parseFloat(document.getElementById('peso').value);
-    if (!pes || pes < 20 || pes > 300) { showErr('err-peso','Ingrese un peso válido.'); markErr('peso'); ok = false; }
+    const lbs = parseFloat(document.getElementById('peso').value);
+    if (!lbs || lbs < 44 || lbs > 660) { showErr('err-peso','Ingrese un peso válido en libras (ej: 154).'); markErr('peso'); ok = false; }
     else { hideErr('err-peso'); clearErr('peso'); }
   }
 
@@ -1652,25 +1549,17 @@ function validateStep(step) {
       if (!v) { showErr('err-'+id); markErr(id); ok = false; }
       else { hideErr('err-'+id); clearErr(id); }
     });
-    const ing = document.getElementById('ingresos').value.trim();
-    if (!ing) { showErr('err-ingresos'); markErr('ingresos'); ok = false; }
-    else { hideErr('err-ingresos'); clearErr('ingresos'); }
-    const act = document.getElementById('activos').value.trim();
-    if (!act) { showErr('err-activos'); markErr('activos'); ok = false; }
-    else { hideErr('err-activos'); clearErr('activos'); }
-    const pas = document.getElementById('pasivos').value.trim();
-    if (!pas) { showErr('err-pasivos'); markErr('pasivos'); ok = false; }
-    else { hideErr('err-pasivos'); clearErr('pasivos'); }
-    if (!document.querySelector('[name="impuesto"]:checked')) { showErr('err-impuesto'); ok = false; }
-    else hideErr('err-impuesto');
-    if (!document.querySelector('[name="otroSeguro"]:checked')) { showErr('err-otroSeguro'); ok = false; }
-    else hideErr('err-otroSeguro');
+    ['ingresos','activos','pasivos'].forEach(id => {
+      const v = document.getElementById(id).value.trim();
+      if (!v) { showErr('err-'+id); markErr(id); ok = false; }
+      else { hideErr('err-'+id); clearErr(id); }
+    });
+    if (!document.querySelector('[name="impuesto"]:checked')) { showErr('err-impuesto'); ok = false; } else hideErr('err-impuesto');
   }
 
   if (step === 5) {
     if (!document.querySelector('[name="tarjeta"]:checked')) { showErr('err-tarjeta'); ok = false; } else hideErr('err-tarjeta');
     if (!document.querySelector('[name="formaPago"]:checked')) { showErr('err-formaPago'); ok = false; } else hideErr('err-formaPago');
-    if (!document.querySelector('[name="frecPrima"]:checked')) { showErr('err-frecPrima'); ok = false; } else hideErr('err-frecPrima');
   }
 
   if (step === 6) {
@@ -1680,49 +1569,60 @@ function validateStep(step) {
 
   if (step === 7) {
     const cards = document.querySelectorAll('.beneficiary-card');
-    if (cards.length === 0) {
-      showErr('err-beneficiarios','Agregue al menos un beneficiario.');
-      ok = false;
-    } else {
+    if (cards.length === 0) { showErr('err-beneficiarios','Agregue al menos un beneficiario.'); ok = false; }
+    else {
       const total = calcTotal();
-      if (total !== 100) {
-        showErr('err-beneficiarios', `Los porcentajes suman ${total}%. Deben sumar exactamente 100%.`);
-        ok = false;
-      } else hideErr('err-beneficiarios');
+      if (total !== 100) { showErr('err-beneficiarios', `Los porcentajes suman ${total}%. Deben sumar exactamente 100%.`); ok = false; }
+      else hideErr('err-beneficiarios');
       cards.forEach(card => {
-        ['ben-nombre','ben-email','ben-tel'].forEach(cls => {
-          const el = card.querySelector('.'+cls);
-          if (!el.value.trim()) { el.classList.add('error'); ok = false; }
-          else el.classList.remove('error');
-        });
+        // Nombre
+        const nombre = card.querySelector('.ben-nombre');
+        if (!nombre.value.trim()) { nombre.classList.add('error'); ok = false; } else nombre.classList.remove('error');
+        // Parentesco
         const par = card.querySelector('.ben-parentesco');
-        if (!par.value) { par.classList.add('error'); ok = false; }
-        else par.classList.remove('error');
+        if (!par.value) { par.classList.add('error'); ok = false; } else par.classList.remove('error');
+        // Cédula con validación algorítmica
         const ced = card.querySelector('.ben-cedula');
-        if (!ced.value.trim()) { ced.classList.add('error'); ok = false; }
-        else ced.classList.remove('error');
+        const cedErr = card.querySelector('.ben-cedula-err');
+        if (!validateCedula(ced.value.trim())) {
+          ced.classList.add('error'); ok = false;
+          if (cedErr) { cedErr.textContent = 'Cédula inválida (10 dígitos).'; cedErr.classList.add('show'); }
+        } else {
+          ced.classList.remove('error');
+          if (cedErr) cedErr.classList.remove('show');
+        }
+        // Email
+        const email = card.querySelector('.ben-email');
+        const emailErr = card.querySelector('.ben-email-err');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          email.classList.add('error'); ok = false;
+          if (emailErr) { emailErr.textContent = 'Correo electrónico inválido.'; emailErr.classList.add('show'); }
+        } else {
+          email.classList.remove('error');
+          if (emailErr) emailErr.classList.remove('show');
+        }
+        // Teléfono: 10 dígitos Ecuador
+        const tel = card.querySelector('.ben-tel');
+        const telErr = card.querySelector('.ben-tel-err');
+        if (!/^0\d{9}$/.test(tel.value.trim())) {
+          tel.classList.add('error'); ok = false;
+          if (telErr) { telErr.textContent = 'Teléfono inválido (10 dígitos, empieza en 0).'; telErr.classList.add('show'); }
+        } else {
+          tel.classList.remove('error');
+          if (telErr) telErr.classList.remove('show');
+        }
       });
     }
   }
 
   if (step === 8) {
-    ['pep','famPep'].forEach(n => {
-      if (!document.querySelector(`[name="${n}"]:checked`)) { showErr('err-'+n,'Seleccione una opción.'); ok = false; }
-      else hideErr('err-'+n);
-    });
-  }
-
-  if (step === 9) {
-    if (!document.getElementById('checkAcepto').checked) { showErr('err-acepto'); ok = false; }
-    else hideErr('err-acepto');
-    if (!document.getElementById('checkDatos').checked) { showErr('err-datos'); ok = false; }
-    else hideErr('err-datos');
+    if (!document.getElementById('checkAcepto').checked) { showErr('err-acepto'); ok = false; } else hideErr('err-acepto');
+    if (!document.getElementById('checkDatos').checked) { showErr('err-datos'); ok = false; } else hideErr('err-datos');
   }
 
   return ok;
 }
 
-// ── NAVIGATION ──
 function goStep(dir) {
   if (dir === 1) {
     if (currentStep === STEPS.length - 1) { submitForm(); return; }
@@ -1731,15 +1631,15 @@ function goStep(dir) {
   document.getElementById(`step-${currentStep}`).classList.add('hidden');
   currentStep += dir;
   document.getElementById(`step-${currentStep}`).classList.remove('hidden');
-  if (currentStep === 9) buildResumen();
+  if (currentStep === 8) buildResumen();
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── RESUMEN ──
 function buildResumen() {
   const tipo = document.querySelector('[name="tipoDoc"]:checked')?.value || '—';
   const doc = tipo === 'cedula' ? document.getElementById('numCedula').value : document.getElementById('numPasaporte').value;
+  const lbs = document.getElementById('peso').value;
   const bensRows = [];
   document.querySelectorAll('.beneficiary-card').forEach(card => {
     const nombre = card.querySelector('.ben-nombre').value;
@@ -1747,22 +1647,20 @@ function buildResumen() {
     const pct = card.querySelector('.ben-pct').value;
     bensRows.push(`<div class="ben-resumen-row"><span><strong>${nombre}</strong> · ${par}</span><span>${pct}%</span></div>`);
   });
-
   const items = [
     { k:'Documento', v: `${tipo === 'cedula' ? 'Cédula' : 'Pasaporte'} ${doc}` },
     { k:'Nombre', v: document.getElementById('nombres').value },
     { k:'Correo', v: document.getElementById('email').value },
     { k:'Teléfono', v: document.getElementById('telefono').value },
     { k:'Ciudad', v: document.getElementById('ciudad').value + ', ' + document.getElementById('provincia').value },
+    { k:'Peso', v: lbs + ' libras (' + (parseFloat(lbs)*0.453592).toFixed(1) + ' kg)' },
     { k:'Profesión', v: document.getElementById('profesion').value },
     { k:'Empresa', v: document.getElementById('empresa').value },
     { k:'Ingresos/mes', v: '$' + document.getElementById('ingresos').value },
     { k:'Tarjeta', v: (document.querySelector('[name="tarjeta"]:checked')?.value || '—').toUpperCase() },
     { k:'Forma de pago', v: document.querySelector('[name="formaPago"]:checked')?.value || '—' },
-    { k:'Frecuencia prima', v: document.querySelector('[name="frecPrima"]:checked')?.value || '—' },
     { k:'Documentos', v: selectedFiles.length + ' archivo(s) adjunto(s)' },
   ];
-
   document.getElementById('resumenFinal').innerHTML = `
     <div class="resumen-grid">
       ${items.map(i => `<div class="resumen-item"><div class="resumen-key">${i.k}</div><div class="resumen-val">${i.v || '—'}</div></div>`).join('')}
@@ -1773,10 +1671,14 @@ function buildResumen() {
     </div>`;
 }
 
-// ── SUBMIT ──
 async function submitForm() {
-  if (!validateStep(9)) return;
+  if (!validateStep(8)) return;
   document.getElementById('loadingOverlay').classList.add('show');
+
+  const tipo = document.querySelector('[name="tipoDoc"]:checked')?.value;
+  const numDoc = tipo === 'cedula' ? document.getElementById('numCedula').value : document.getElementById('numPasaporte').value;
+  const lbs = document.getElementById('peso').value;
+  const kg = (parseFloat(lbs) * 0.453592).toFixed(1);
 
   const beneficiarios = [];
   document.querySelectorAll('.beneficiary-card').forEach(card => {
@@ -1791,12 +1693,9 @@ async function submitForm() {
     });
   });
 
-  const tipo = document.querySelector('[name="tipoDoc"]:checked')?.value;
   const payload = {
-    // Identificación
     tipoDocumento: tipo,
-    numeroDocumento: tipo === 'cedula' ? document.getElementById('numCedula').value : document.getElementById('numPasaporte').value,
-    // Datos personales
+    numeroDocumento: numDoc,
     nombres: document.getElementById('nombres').value,
     fechaNacimiento: document.getElementById('fechaNac').value,
     estadoCivil: document.getElementById('estadoCivil').value,
@@ -1808,8 +1707,8 @@ async function submitForm() {
     ciudad: document.getElementById('ciudad').value,
     provincia: document.getElementById('provincia').value,
     estatura: document.getElementById('estatura').value,
-    peso: document.getElementById('peso').value,
-    // Salud
+    pesoLibras: lbs,
+    pesoKg: kg,
     tieneDiagnostico: document.querySelector('[name="tieneDiag"]:checked')?.value,
     detalleDiagnostico: document.getElementById('detEnfermedad')?.value || '',
     fechaDiagnostico: document.getElementById('fechaDiag')?.value || '',
@@ -1822,7 +1721,6 @@ async function submitForm() {
     frecuenciaBebe: document.querySelector('[name="frecBebe"]:checked')?.value || '',
     practicaDeporteRiesgo: document.querySelector('[name="deporte"]:checked')?.value,
     detalleDeporte: document.getElementById('detDeporte')?.value || '',
-    // Ocupación
     profesion: document.getElementById('profesion').value,
     actividadEconomica: document.getElementById('actEconomica').value,
     empresa: document.getElementById('empresa').value,
@@ -1833,25 +1731,14 @@ async function submitForm() {
     activos: document.getElementById('activos').value,
     pasivos: document.getElementById('pasivos').value,
     declaraImpuesto: document.querySelector('[name="impuesto"]:checked')?.value,
-    tieneOtroSeguro: document.querySelector('[name="otroSeguro"]:checked')?.value,
-    detalleOtroSeguro: document.getElementById('detOtroSeguro')?.value || '',
-    // Pago
     tipoTarjeta: document.querySelector('[name="tarjeta"]:checked')?.value,
     formaPago: document.querySelector('[name="formaPago"]:checked')?.value,
     tipoDiferido: document.querySelector('[name="tipoDiferido"]:checked')?.value || '',
-    frecuenciaPrima: document.querySelector('[name="frecPrima"]:checked')?.value,
-    // PEP
-    esPEP: document.querySelector('[name="pep"]:checked')?.value,
-    detallePEP: document.getElementById('detPep')?.value || '',
-    institucionPEP: document.getElementById('instPep')?.value || '',
-    familiarPEP: document.querySelector('[name="famPep"]:checked')?.value,
-    detalleFamiliarPEP: document.getElementById('detFamPep')?.value || '',
-    // Beneficiarios
     beneficiarios: JSON.stringify(beneficiarios),
     cantidadDocumentos: selectedFiles.length,
     nombresDocumentos: selectedFiles.map(f => f.name).join(', '),
     timestamp: new Date().toISOString(),
-    referencia: 'CORP-' + Date.now().toString(36).toUpperCase(),
+    referencia: numDoc, // número de cédula como referencia
   };
 
   if (APPS_SCRIPT_URL !== 'TU_URL_DE_APPS_SCRIPT_AQUI') {
@@ -1871,7 +1758,7 @@ async function submitForm() {
   document.getElementById('loadingOverlay').classList.remove('show');
   document.getElementById('formCard').querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
   document.getElementById('navButtons').classList.add('hidden');
-  document.getElementById('successRef').textContent = 'Referencia: ' + payload.referencia;
+  document.getElementById('successRef').textContent = 'Cédula de referencia: ' + payload.referencia;
   document.getElementById('successScreen').classList.add('show');
   document.getElementById('progressFill').style.width = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
