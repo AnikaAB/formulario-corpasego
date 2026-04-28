@@ -772,13 +772,13 @@
         <div class="field">
           <label class="field-label">Tipo de Documento <span class="req">✦</span></label>
           <div class="radio-group row" id="tipoDocGroup">
-            <label class="radio-opt" onclick="selectRadio('tipoDoc','cedula',this)">
-              <input type="radio" name="tipoDoc" value="cedula"> Cédula de Identidad
-            </label>
-            <label class="radio-opt" onclick="selectRadio('tipoDoc','pasaporte',this)">
-              <input type="radio" name="tipoDoc" value="pasaporte"> Pasaporte
-            </label>
-          </div>
+  <label class="radio-opt" onclick="selectRadio('tipoDoc','cedula',this);toggleField('fieldCedula',true);toggleField('fieldPasaporte',false)">
+    <input type="radio" name="tipoDoc" value="cedula"> Cédula de Identidad
+  </label>
+  <label class="radio-opt" onclick="selectRadio('tipoDoc','pasaporte',this);toggleField('fieldCedula',false);toggleField('fieldPasaporte',true)">
+    <input type="radio" name="tipoDoc" value="pasaporte"> Pasaporte
+  </label>
+</div>
           <div class="field-error" id="err-tipoDoc">Seleccione el tipo de documento.</div>
         </div>
 
