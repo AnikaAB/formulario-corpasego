@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORPASEGO – Solicitud Seguro de Vida</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8952A;
+    --gold-light: #E8B84B;
+    --gold-pale: #FDF6E3;
+    --gold-glow: rgba(200,149,42,0.18);
+    --navy: #1A2744;
+    --navy-mid: #253562;
+    --navy-light: #3A4F82;
+    --white: #FFFFFF;
+    --gray-50: #FAFAF8;
+    --gray-100: #F4F4F1;
+    --gray-200: #E8E8E3;
+    --gray-400: #AAAAAA;
+    --gray-600: #666666;
+    --gray-800: #2E2E2E;
+    --error: #C0392B;
+    --error-bg: #FFF5F5;
+    --success: #1A7A4A;
+    --success-bg: #F0FFF7;
+    --radius: 14px;
+    --radius-sm: 9px;
+    --shadow: 0 4px 24px rgba(26,39,68,0.10);
+    --shadow-lg: 0 12px 48px rgba(26,39,68,0.22);
+    --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    color: var(--gray-800);
+    background-image: radial-gradient(ellipse at 20% 0%, rgba(200,149,42,0.07) 0%, transparent 60%),
+                      radial-gradient(ellipse at 80% 100%, rgba(58,79,130,0.3) 0%, transparent 60%);
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: transparent;
+    padding: 32px 0 0;
+    text-align: center;
+  }
+  .logo-box {
+    display: inline-block;
+    background: var(--white);
+    padding: 12px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 0 1px rgba(200,149,42,0.2);
+  }
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.12em;
+  }
+  .logo-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.24em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .header-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(232,184,75,0.7);
+    font-size: 0.88rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    background: rgba(26,39,68,0.92);
+    backdrop-filter: blur(12px);
+    padding: 16px 0 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(200,149,42,0.15);
+  }
+  .progress-steps {
+    display: flex;
+    justify-content: center;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .progress-steps::-webkit-scrollbar { display: none; }
+  .step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 52px;
+    position: relative;
+  }
+  .step-dot::before {
+    content: '';
+    position: absolute;
+    top: 13px;
+    left: calc(50% + 13px);
+    right: calc(-50% + 13px);
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    z-index: 0;
+    transition: background 0.4s;
+  }
+  .step-dot:last-child::before { display: none; }
+  .step-circle {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    border: 2px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    position: relative;
+    z-index: 1;
+    transition: var(--transition);
+  }
+  .step-dot.active .step-circle {
+    background: var(--gold);
+    border-color: var(--gold-light);
+    color: var(--navy);
+    box-shadow: 0 0 0 4px rgba(200,149,42,0.22), 0 0 16px rgba(200,149,42,0.35);
+  }
+  .step-dot.done .step-circle {
+    background: rgba(200,149,42,0.25);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+  .step-dot.done::before { background: rgba(200,149,42,0.4); }
+  .step-label {
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 5px;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .step-dot.active .step-label { color: var(--gold-light); }
+  .step-dot.done .step-label { color: rgba(232,184,75,0.5); }
+  .progress-bar-line {
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 14px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transition: width 0.55s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ── FORM WRAPPER ── */
+  .form-outer {
+    display: flex;
+    justify-content: center;
+    padding: 36px 16px 80px;
+  }
+  .form-card {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 700px;
+    overflow: hidden;
+    animation: cardIn 0.45s cubic-bezier(0.4,0,0.2,1);
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 32px 40px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,149,42,0.08), transparent 70%);
+  }
+  .section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light) 60%, transparent);
+  }
+  .section-number {
+    font-size: 0.68rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    color: var(--white);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .section-subtitle {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    margin-top: 8px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .section-body { padding: 36px 40px; }
+
+  /* ── FIELDS ── */
+  .field { margin-bottom: 22px; }
+  .field:last-child { margin-bottom: 0; }
+  label.field-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 7px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  label.field-label .req { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    transition: var(--transition);
+    outline: none;
+    appearance: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+    background: var(--white);
+    box-shadow: 0 0 0 3px var(--gold-glow);
+  }
+  input.error, textarea.error, select.error {
+    border-color: var(--error);
+    background: var(--error-bg);
+  }
+  textarea { resize: vertical; min-height: 90px; }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .field-error {
+    font-size: 0.74rem;
+    color: var(--error);
+    margin-top: 5px;
+    display: none;
+    font-weight: 500;
+  }
+  .field-error.show { display: block; }
+
+  .field-hint {
+    font-size: 0.72rem;
+    color: var(--gray-400);
+    margin-top: 4px;
+  }
+
+  /* ── RADIO / CHECKBOX ── */
+  .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-group.row, .checkbox-group.row { flex-direction: row; flex-wrap: wrap; }
+  .radio-opt, .check-opt {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 15px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--gray-50);
+    font-size: 0.875rem;
+    color: var(--gray-800);
+    user-select: none;
+    font-weight: 400;
+  }
+  .radio-opt:hover, .check-opt:hover { border-color: var(--gold); background: var(--gold-pale); }
+  .radio-opt input, .check-opt input { width: 15px; height: 15px; accent-color: var(--gold); flex-shrink: 0; }
+  .radio-opt.selected, .check-opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* ── GRID ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 540px) {
+    .two-col, .three-col { grid-template-columns: 1fr; }
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--gold-pale);
+    border: 1px solid rgba(200,149,42,0.25);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    font-size: 0.84rem;
+    color: var(--navy);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .info-box ul { padding-left: 18px; margin-top: 8px; }
+  .info-box li { margin-bottom: 5px; }
+
+  .success-box {
+    background: var(--success-bg);
+    border: 1px solid rgba(26,122,74,0.2);
+    border-left: 4px solid var(--success);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-size: 0.83rem;
+    color: #155534;
+    margin-bottom: 20px;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .sub-section {
+    border-top: 1px solid var(--gray-200);
+    margin: 28px 0 24px;
+    padding-top: 24px;
+  }
+  .sub-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--navy-light);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-200);
+  }
+
+  /* ── BENEFICIARIES ── */
+  .beneficiary-card {
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+  .beneficiary-card:focus-within { border-color: var(--gold); }
+  .beneficiary-header {
+    background: linear-gradient(90deg, var(--navy), var(--navy-mid));
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .beneficiary-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-light);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .btn-remove {
+    background: rgba(192,57,43,0.18);
+    border: 1px solid rgba(192,57,43,0.35);
+    color: #F08070;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .btn-remove:hover { background: rgba(192,57,43,0.35); color: #FF8070; }
+  .beneficiary-body { padding: 18px 20px; }
+
+  /* ── PCT SUMMARY ── */
+  .pct-summary {
+    background: var(--gray-50);
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-top: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .pct-label { font-size: 0.72rem; color: var(--gray-600); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .pct-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: color var(--transition);
+  }
+  .pct-value.ok { color: var(--success); }
+  .pct-value.warn { color: var(--gold); }
+  .pct-value.over { color: var(--error); }
+  .pct-right { flex: 1; min-width: 140px; }
+  .pct-bar-wrap { height: 7px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+  .pct-bar-fill { height: 100%; border-radius: 4px; transition: width 0.35s cubic-bezier(0.4,0,0.2,1), background 0.3s; }
+  .pct-bar-fill.ok { background: var(--success); }
+  .pct-bar-fill.warn { background: var(--gold); }
+  .pct-bar-fill.over { background: var(--error); }
+  .pct-msg { font-size: 0.76rem; font-weight: 500; }
+  .pct-msg.ok { color: var(--success); }
+  .pct-msg.warn { color: var(--gold); }
+  .pct-msg.over { color: var(--error); }
+
+  /* ── FILE UPLOAD ── */
+  .file-drop {
+    border: 2px dashed var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    background: var(--gray-50);
+    position: relative;
+  }
+  .file-drop:hover, .file-drop.dragover {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+  }
+  .file-drop input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+  .file-drop-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .file-drop-text { font-size: 0.85rem; color: var(--gray-600); }
+  .file-drop-text strong { color: var(--gold); }
+  .file-drop-hint { font-size: 0.72rem; color: var(--gray-400); margin-top: 4px; }
+
+  .file-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1.5px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 0.82rem;
+  }
+  .file-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .file-name { flex: 1; color: var(--navy); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-size { color: var(--gray-400); font-size: 0.72rem; flex-shrink: 0; }
+  .file-remove {
+    color: var(--error);
+    cursor: pointer;
+    font-size: 0.75rem;
+    background: none;
+    border: none;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: var(--transition);
+  }
+  .file-remove:hover { background: var(--error-bg); }
+
+  /* ── BUTTONS ── */
+  .btn-add {
+    display: flex; align-items: center; gap: 8px;
+    background: transparent;
+    border: 2px dashed var(--gold);
+    color: var(--gold);
+    border-radius: var(--radius-sm);
+    padding: 11px 20px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    transition: var(--transition);
+    margin-top: 6px;
+  }
+  .btn-add:hover { background: var(--gold-pale); }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px 30px;
+    border-top: 1px solid var(--gray-200);
+    gap: 12px;
+    background: var(--gray-50);
+  }
+  .btn-back, .btn-next, .btn-submit {
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    letter-spacing: 0.02em;
+  }
+  .btn-back {
+    background: var(--white);
+    color: var(--gray-600);
+    border: 1.5px solid var(--gray-200);
+  }
+  .btn-back:hover { background: var(--gray-100); color: var(--gray-800); border-color: var(--gray-400); }
+  .btn-back:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-next, .btn-submit {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--navy);
+    box-shadow: 0 4px 16px rgba(200,149,42,0.3);
+    font-weight: 700;
+  }
+  .btn-next:hover, .btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(200,149,42,0.42);
+  }
+  .btn-submit { padding: 13px 36px; }
+
+  /* ── SUCCESS SCREEN ── */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 70px 40px 60px;
+  }
+  .success-screen.show { display: block; }
+  .success-ring {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 2.2rem;
+    box-shadow: 0 8px 32px rgba(200,149,42,0.3);
+    animation: popIn 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .success-screen h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--navy);
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+  .success-screen p { color: var(--gray-600); line-height: 1.7; font-size: 0.95rem; }
+  .success-ref {
+    display: inline-block;
+    background: var(--gold-pale);
+    border: 1px solid rgba(200,149,42,0.3);
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* ── LOADING ── */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,39,68,0.75);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .loading-overlay.show { display: flex; }
+  .spinner {
+    width: 52px; height: 52px;
+    border: 4px solid rgba(200,149,42,0.2);
+    border-top-color: var(--gold-light);
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-overlay p { color: rgba(255,255,255,0.85); font-size: 0.9rem; letter-spacing: 0.04em; }
+
+  /* ── RESUMEN ── */
+  .resumen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .resumen-item {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 12px 15px;
+  }
+  .resumen-key { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); font-weight: 600; margin-bottom: 3px; }
+  .resumen-val { font-size: 0.88rem; color: var(--navy); font-weight: 500; }
+  .resumen-ben {
+    background: var(--gold-pale);
+    border: 1px solid rgba(200,149,42,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 12px;
+  }
+  .resumen-ben-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+  .ben-resumen-row { display: flex; justify-content: space-between; font-size: 0.84rem; padding: 4px 0; border-bottom: 1px solid rgba(200,149,42,0.1); }
+  .ben-resumen-row:last-child { border-bottom: none; }
+  @media (max-width: 500px) {
+    .resumen-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── TOOLTIP ── */
+  .tooltip-wrap { position: relative; display: inline-block; margin-left: 6px; }
+  .tooltip-icon {
+    width: 16px; height: 16px;
+    background: var(--gray-200);
+    color: var(--gray-600);
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    vertical-align: middle;
+  }
+  .tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.72rem;
+    padding: 8px 12px;
+    border-radius: 7px;
+    width: 180px;
+    line-height: 1.5;
+    z-index: 50;
+    pointer-events: none;
+    font-weight: 400;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .tooltip-wrap:hover .tooltip-text { display: block; }
+
+  /* responsive */
+  @media (max-width: 560px) {
+    .section-body, .nav-buttons { padding-left: 20px; padding-right: 20px; }
+    .section-header { padding: 24px 20px 20px; }
+    .section-title { font-size: 1.4rem; }
+  }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p>Enviando solicitud...</p>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo-box">
+    <div class="logo-name">CORPASEGO</div>
+    <div class="logo-sub">Broker de Seguros · Cia. Ltda.</div>
+  </div>
+  <div class="header-tagline">Asesora Productora de Seguros</div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-steps" id="progressSteps"></div>
+  <div class="progress-bar-line">
+    <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-outer">
+  <div class="form-card" id="formCard">
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-ring">✓</div>
+      <h2>¡Solicitud enviada con éxito!</h2>
+      <p>Gracias por completar su solicitud de seguro de vida.<br>Un asesor de <strong>CORPASEGO</strong> se comunicará con usted a la brevedad.</p>
+      <div class="success-ref" id="successRef"></div>
+    </div>
+
+    <!-- ═══ STEP 0: BIENVENIDA ═══ -->
+    <div class="form-step" id="step-0">
+      <div class="section-header">
+        <div class="section-number">Bienvenido</div>
+        <div class="section-title">El Seguro de Vida, el respaldo que su familia merece</div>
+        <div class="section-subtitle">Complete el siguiente formulario de manera honesta. Toda la información es estrictamente confidencial.</div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          <strong>Antes de comenzar, tenga en cuenta:</strong>
+          <ul>
+            <li>Este formulario tiene <strong>9 secciones</strong>. Puede regresar a corregir en cualquier momento.</li>
+            <li>Los campos con <span style="color:var(--gold)">✦</span> son obligatorios.</li>
+            <li>Necesitará adjuntar documentos al final (cédula, planilla de servicios, RUC).</li>
+            <li>Los porcentajes de sus beneficiarios deben sumar exactamente <strong>100%</strong>.</li>
+            <li>La información será enviada de forma segura a CORPASEGO.</li>
+          </ul>
+        </div>
+        <div style="text-align:center;padding:10px 0 4px;">
+          <div style="font-size:0.8rem;color:var(--gray-400);">Tiempo estimado de llenado: <strong style="color:var(--navy)">10–15 minutos</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 1: IDENTIFICACIÓN ═══ -->
+    <div class="form-step hidden" id="step-1">
+      <div class="section-header">
+        <div class="section-number">Sección 1 de 9 · Identificación</div>
+        <div class="section-title">Documento de Identidad</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label class="field-label">Tipo de Documento <span class="req">✦</span></label>
+          <div class="radio-group row" id="tipoDocGroup">
+            <label class="radio-opt" onclick="selectRadio('tipoDoc','cedula',this)">
+              <input type="radio" name="tipoDoc" value="cedula"> Cédula de Identidad
+            </label>
+            <label class="radio-opt" onclick="selectRadio('tipoDoc','pasaporte',this)">
+              <input type="radio" name="tipoDoc" value="pasaporte"> Pasaporte
+            </label>
+          </div>
+          <div class="field-error" id="err-tipoDoc">Seleccione el tipo de documento.</div>
+        </div>
+
+        <div class="field hidden" id="fieldCedula">
+          <label class="field-label" for="numCedula">Número de Cédula <span class="req">✦</span></label>
+          <input type="text" id="numCedula" placeholder="0912345678" maxlength="10" inputmode="numeric">
+          <div class="field-error" id="err-numCedula">Ingrese una cédula ecuatoriana válida (10 dígitos).</div>
+          <div class="field-hint">10 dígitos numéricos sin espacios ni guiones.</div>
+        </div>
+
+        <div class="field hidden" id="fieldPasaporte">
+          <label class="field-label" for="numPasaporte">Número de Pasaporte <span class="req">✦</span></label>
+          <input type="text" id="numPasaporte" placeholder="AB123456">
+          <div class="field-error" id="err-numPasaporte">Ingrese el número de pasaporte.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 2: DATOS PERSONALES ═══ -->
+    <div class="form-step hidden" id="step-2">
+      <div class="section-header">
+        <div class="section-number">Sección 2 de 9 · Datos Personales</div>
+        <div class="section-title">Información Personal</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label class="field-label" for="nombres">Apellidos y Nombres Completos <span class="req">✦</span></label>
+          <input type="text" id="nombres" placeholder="Ej: Gómez Pérez Juan Carlos">
+          <div class="field-error" id="err-nombres">Ingrese sus nombres completos.</div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="fechaNac">Fecha de Nacimiento <span class="req">✦</span></label>
+            <input type="date" id="fechaNac" max="">
+            <div class="field-error" id="err-fechaNac">Ingrese una fecha de nacimiento válida.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="estadoCivil">Estado Civil <span class="req">✦</span></label>
+            <select id="estadoCivil">
+              <option value="">Seleccione...</option>
+              <option value="soltero">Soltero/a</option>
+              <option value="casado">Casado/a</option>
+              <option value="union_libre">Unión Libre</option>
+              <option value="divorciado">Divorciado/a</option>
+              <option value="viudo">Viudo/a</option>
+            </select>
+            <div class="field-error" id="err-estadoCivil">Seleccione su estado civil.</div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="genero">Género <span class="req">✦</span></label>
+            <select id="genero">
+              <option value="">Seleccione...</option>
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="otro">Otro</option>
+            </select>
+            <div class="field-error" id="err-genero">Seleccione su género.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="nacionalidad">Nacionalidad <span class="req">✦</span></label>
+            <input type="text" id="nacionalidad" placeholder="Ej: Ecuatoriana" value="Ecuatoriana">
+            <div class="field-error" id="err-nacionalidad">Ingrese su nacionalidad.</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-section-title">Contacto</div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="email">Correo Electrónico <span class="req">✦</span></label>
+            <input type="email" id="email" placeholder="correo@ejemplo.com">
+            <div class="field-error" id="err-email">Ingrese un correo electrónico válido.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="telefono">Teléfono / Celular <span class="req">✦</span></label>
+            <input type="tel" id="telefono" placeholder="0991234567" maxlength="13">
+            <div class="field-error" id="err-telefono">Ingrese un número de teléfono válido.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="direccion">Dirección de Domicilio <span class="req">✦</span></label>
+          <input type="text" id="direccion" placeholder="Ej: Av. Principal 123 y Calle Secundaria, Sector Norte">
+          <div class="field-error" id="err-direccion">Ingrese su dirección de domicilio.</div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="ciudad">Ciudad <span class="req">✦</span></label>
+            <input type="text" id="ciudad" placeholder="Ej: Guayaquil">
+            <div class="field-error" id="err-ciudad">Ingrese su ciudad.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="provincia">Provincia <span class="req">✦</span></label>
+            <select id="provincia">
+              <option value="">Seleccione...</option>
+              <option>Azuay</option><option>Bolívar</option><option>Cañar</option>
+              <option>Carchi</option><option>Chimborazo</option><option>Cotopaxi</option>
+              <option>El Oro</option><option>Esmeraldas</option><option>Galápagos</option>
+              <option>Guayas</option><option>Imbabura</option><option>Loja</option>
+              <option>Los Ríos</option><option>Manabí</option><option>Morona Santiago</option>
+              <option>Napo</option><option>Orellana</option><option>Pastaza</option>
+              <option>Pichincha</option><option>Santa Elena</option><option>Santo Domingo de los Tsáchilas</option>
+              <option>Sucumbíos</option><option>Tungurahua</option><option>Zamora Chinchipe</option>
+            </select>
+            <div class="field-error" id="err-provincia">Seleccione su provincia.</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-section-title">Datos Físicos</div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="estatura">Estatura (metros) <span class="req">✦</span></label>
+            <input type="number" id="estatura" placeholder="1.70" step="0.01" min="1" max="2.5">
+            <div class="field-error" id="err-estatura">Ingrese una estatura válida (ej: 1.70).</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="peso">Peso (kg) <span class="req">✦</span></label>
+            <input type="number" id="peso" placeholder="70" min="20" max="300">
+            <div class="field-error" id="err-peso">Ingrese un peso válido.</div>
+          </div>
+        </div>
+        <div id="imcDisplay" class="hidden" style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:12px 16px;font-size:0.82rem;color:var(--gray-600);margin-top:-8px;"></div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 3: SALUD ═══ -->
+    <div class="form-step hidden" id="step-3">
+      <div class="section-header">
+        <div class="section-number">Sección 3 de 9 · Salud</div>
+        <div class="section-title">Estado de Salud</div>
+        <div class="section-subtitle">Responda con honestidad. Esta información es confidencial y requerida para su póliza.</div>
+      </div>
+      <div class="section-body">
+
+        <div class="field">
+          <label class="field-label">¿Tiene algún diagnóstico médico? <span class="req">✦</span></label>
+          <div class="radio-group row" id="tieneDiagGroup">
+            <label class="radio-opt" onclick="selectRadio('tieneDiag','si',this);toggleField('fieldDiag',true)"><input type="radio" name="tieneDiag" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('tieneDiag','no',this);toggleField('fieldDiag',false)"><input type="radio" name="tieneDiag" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-tieneDiag">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldDiag">
+          <div class="field">
+            <label class="field-label" for="detEnfermedad">Describa su diagnóstico <span class="req">✦</span></label>
+            <textarea id="detEnfermedad" placeholder="Nombre de la enfermedad, tratamiento actual..."></textarea>
+          </div>
+          <div class="field">
+            <label class="field-label" for="fechaDiag">Fecha de Diagnóstico <span class="req">✦</span></label>
+            <input type="date" id="fechaDiag">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">¿Exámenes de laboratorio en los últimos 2 años? <span class="req">✦</span></label>
+          <div class="radio-group row" id="tieneLabGroup">
+            <label class="radio-opt" onclick="selectRadio('tieneLab','si',this);toggleField('fieldLab',true)"><input type="radio" name="tieneLab" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('tieneLab','no',this);toggleField('fieldLab',false)"><input type="radio" name="tieneLab" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-tieneLab">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldLab">
+          <div class="field">
+            <label class="field-label" for="detLab">¿Cuáles exámenes se realizó? <span class="req">✦</span></label>
+            <textarea id="detLab" placeholder="Indique los exámenes y resultados relevantes..."></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">¿Consume tabaco / cigarrillos? <span class="req">✦</span></label>
+          <div class="radio-group row" id="fumaGroup">
+            <label class="radio-opt" onclick="selectRadio('fuma','si',this);toggleField('fieldFuma',true)"><input type="radio" name="fuma" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('fuma','no',this);toggleField('fieldFuma',false)"><input type="radio" name="fuma" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-fuma">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldFuma">
+          <div class="two-col">
+            <div class="field">
+              <label class="field-label" for="desdeFuma">¿Desde cuándo? <span class="req">✦</span></label>
+              <input type="text" id="desdeFuma" placeholder="Ej: 2010 / hace 5 años">
+            </div>
+            <div class="field">
+              <label class="field-label" for="cntFuma">Cigarrillos por día (aprox.) <span class="req">✦</span></label>
+              <input type="number" id="cntFuma" placeholder="Ej: 10" min="1" max="100">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">¿Ingiere bebidas alcohólicas? <span class="req">✦</span></label>
+          <div class="radio-group row" id="bebeGroup">
+            <label class="radio-opt" onclick="selectRadio('bebe','si',this);toggleField('fieldBebe',true)"><input type="radio" name="bebe" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('bebe','no',this);toggleField('fieldBebe',false)"><input type="radio" name="bebe" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-bebe">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldBebe">
+          <div class="field">
+            <label class="field-label">¿Con qué frecuencia? <span class="req">✦</span></label>
+            <div class="radio-group" id="frecBebeGroup">
+              <label class="radio-opt" onclick="selectRadio('frecBebe','siempre',this)"><input type="radio" name="frecBebe" value="siempre"> Siempre (diario)</label>
+              <label class="radio-opt" onclick="selectRadio('frecBebe','casi_siempre',this)"><input type="radio" name="frecBebe" value="casi_siempre"> Casi siempre (4–5 veces/semana)</label>
+              <label class="radio-opt" onclick="selectRadio('frecBebe','a_menudo',this)"><input type="radio" name="frecBebe" value="a_menudo"> A menudo (2–3 veces/semana)</label>
+              <label class="radio-opt" onclick="selectRadio('frecBebe','a_veces',this)"><input type="radio" name="frecBebe" value="a_veces"> A veces (fines de semana)</label>
+              <label class="radio-opt" onclick="selectRadio('frecBebe','casi_nunca',this)"><input type="radio" name="frecBebe" value="casi_nunca"> Casi nunca (ocasional)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">¿Practica deportes de riesgo o actividades peligrosas? <span class="req">✦</span></label>
+          <div class="radio-group row" id="deporteGroup">
+            <label class="radio-opt" onclick="selectRadio('deporte','si',this);toggleField('fieldDeporte',true)"><input type="radio" name="deporte" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('deporte','no',this);toggleField('fieldDeporte',false)"><input type="radio" name="deporte" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-deporte">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldDeporte">
+          <div class="field">
+            <label class="field-label" for="detDeporte">¿Cuál actividad? <span class="req">✦</span></label>
+            <input type="text" id="detDeporte" placeholder="Ej: Motociclismo, escalada, aviación...">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ STEP 4: OCUPACIÓN ═══ -->
+    <div class="form-step hidden" id="step-4">
+      <div class="section-header">
+        <div class="section-number">Sección 4 de 9 · Actividad Económica</div>
+        <div class="section-title">Ocupación e Ingresos</div>
+      </div>
+      <div class="section-body">
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="profesion">Profesión <span class="req">✦</span></label>
+            <input type="text" id="profesion" placeholder="Ej: Ingeniero Civil">
+            <div class="field-error" id="err-profesion">Ingrese su profesión.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="actEconomica">Actividad Económica <span class="req">✦</span></label>
+            <input type="text" id="actEconomica" placeholder="Ej: Construcción">
+            <div class="field-error" id="err-actEconomica">Ingrese su actividad económica.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="empresa">Nombre de la empresa <span class="req">✦</span></label>
+          <input type="text" id="empresa" placeholder="Nombre de la empresa o negocio propio">
+          <div class="field-error" id="err-empresa">Ingrese el nombre de la empresa.</div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="dirEmpresa">Dirección de la empresa <span class="req">✦</span></label>
+          <input type="text" id="dirEmpresa" placeholder="Ej: Av. Principal 456 y Calle Lateral, Ciudad">
+          <div class="field-error" id="err-dirEmpresa">Ingrese la dirección de la empresa.</div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="telEmpresa">Teléfono de la empresa</label>
+          <input type="tel" id="telEmpresa" placeholder="04-2345678 / 0991234567">
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-section-title">Información Financiera</div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="ingresos">Ingresos mensuales (USD) <span class="req">✦</span></label>
+            <input type="number" id="ingresos" placeholder="Ej: 2500" min="0">
+            <div class="field-error" id="err-ingresos">Ingrese sus ingresos mensuales.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="otrosIngresos">Otros ingresos (USD)</label>
+            <input type="number" id="otrosIngresos" placeholder="Ej: 500" min="0">
+            <div class="field-hint">Rentas, dividendos, etc.</div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label class="field-label" for="activos">Valor total de activos (USD) <span class="req">✦</span></label>
+            <input type="number" id="activos" placeholder="Ej: 150000" min="0">
+            <div class="field-error" id="err-activos">Ingrese el valor de sus activos.</div>
+            <div class="field-hint">Suma de bienes inmuebles, vehículos, etc.</div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="pasivos">Valor total de pasivos (USD) <span class="req">✦</span></label>
+            <input type="number" id="pasivos" placeholder="Ej: 30000" min="0">
+            <div class="field-error" id="err-pasivos">Ingrese el valor de sus pasivos.</div>
+            <div class="field-hint">Préstamos, deudas vigentes.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">¿Declara impuesto a la renta? <span class="req">✦</span></label>
+          <div class="radio-group row" id="impuestoGroup">
+            <label class="radio-opt" onclick="selectRadio('impuesto','si',this)"><input type="radio" name="impuesto" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('impuesto','no',this)"><input type="radio" name="impuesto" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-impuesto">Seleccione una opción.</div>
+        </div>
+        <div class="field">
+          <label class="field-label">¿Tiene o ha tenido otro seguro de vida? <span class="req">✦</span></label>
+          <div class="radio-group row" id="otroSeguroGroup">
+            <label class="radio-opt" onclick="selectRadio('otroSeguro','si',this);toggleField('fieldOtroSeguro',true)"><input type="radio" name="otroSeguro" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('otroSeguro','no',this);toggleField('fieldOtroSeguro',false)"><input type="radio" name="otroSeguro" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-otroSeguro">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldOtroSeguro">
+          <div class="field">
+            <label class="field-label" for="detOtroSeguro">¿Con qué aseguradora y monto asegurado? <span class="req">✦</span></label>
+            <input type="text" id="detOtroSeguro" placeholder="Ej: Equivida, $50,000">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 5: PAGO ═══ -->
+    <div class="form-step hidden" id="step-5">
+      <div class="section-header">
+        <div class="section-number">Sección 5 de 9 · Forma de Pago</div>
+        <div class="section-title">Información de Pago</div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label class="field-label">Tipo de tarjeta <span class="req">✦</span></label>
+          <div class="radio-group row" id="tarjetaGroup">
+            <label class="radio-opt" onclick="selectRadio('tarjeta','visa',this)"><input type="radio" name="tarjeta" value="visa"> 💳 Visa</label>
+            <label class="radio-opt" onclick="selectRadio('tarjeta','mastercard',this)"><input type="radio" name="tarjeta" value="mastercard"> 💳 Mastercard</label>
+            <label class="radio-opt" onclick="selectRadio('tarjeta','american_express',this)"><input type="radio" name="tarjeta" value="american_express"> 💳 Amex</label>
+            <label class="radio-opt" onclick="selectRadio('tarjeta','diners',this)"><input type="radio" name="tarjeta" value="diners"> 💳 Diners</label>
+          </div>
+          <div class="field-error" id="err-tarjeta">Seleccione el tipo de tarjeta.</div>
+        </div>
+        <div class="field">
+          <label class="field-label">Forma de pago <span class="req">✦</span></label>
+          <div class="radio-group row" id="formaPagoGroup">
+            <label class="radio-opt" onclick="selectRadio('formaPago','corriente',this);toggleField('fieldDiferido',false)">
+              <input type="radio" name="formaPago" value="corriente"> Corriente
+            </label>
+            <label class="radio-opt" onclick="selectRadio('formaPago','diferido',this);toggleField('fieldDiferido',true)">
+              <input type="radio" name="formaPago" value="diferido"> Diferido sin intereses
+            </label>
+          </div>
+          <div class="field-error" id="err-formaPago">Seleccione forma de pago.</div>
+        </div>
+        <div class="hidden" id="fieldDiferido">
+          <div class="field">
+            <label class="field-label">Número de cuotas <span class="req">✦</span></label>
+            <div class="radio-group row" id="tipoDiferidoGroup">
+              <label class="radio-opt" onclick="selectRadio('tipoDiferido','3m',this)"><input type="radio" name="tipoDiferido" value="3m"> 3 meses</label>
+              <label class="radio-opt" onclick="selectRadio('tipoDiferido','6m',this)"><input type="radio" name="tipoDiferido" value="6m"> 6 meses</label>
+              <label class="radio-opt" onclick="selectRadio('tipoDiferido','9m',this)"><input type="radio" name="tipoDiferido" value="9m"> 9 meses</label>
+              <label class="radio-opt" onclick="selectRadio('tipoDiferido','12m',this)"><input type="radio" name="tipoDiferido" value="12m"> 12 meses</label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Frecuencia de pago de la prima <span class="req">✦</span></label>
+          <div class="radio-group row" id="frecPrimaGroup">
+            <label class="radio-opt" onclick="selectRadio('frecPrima','mensual',this)"><input type="radio" name="frecPrima" value="mensual"> Mensual</label>
+            <label class="radio-opt" onclick="selectRadio('frecPrima','trimestral',this)"><input type="radio" name="frecPrima" value="trimestral"> Trimestral</label>
+            <label class="radio-opt" onclick="selectRadio('frecPrima','semestral',this)"><input type="radio" name="frecPrima" value="semestral"> Semestral</label>
+            <label class="radio-opt" onclick="selectRadio('frecPrima','anual',this)"><input type="radio" name="frecPrima" value="anual"> Anual</label>
+          </div>
+          <div class="field-error" id="err-frecPrima">Seleccione la frecuencia de pago.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 6: DOCUMENTOS ═══ -->
+    <div class="form-step hidden" id="step-6">
+      <div class="section-header">
+        <div class="section-number">Sección 6 de 9 · Documentos</div>
+        <div class="section-title">Documentos Requeridos</div>
+        <div class="section-subtitle">Adjunte los documentos necesarios para la emisión de su póliza.</div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          <strong>Documentos que debe adjuntar:</strong>
+          <ul>
+            <li>Cédula del asegurado <strong>(obligatorio)</strong></li>
+            <li>Cédula del cónyuge (si aplica)</li>
+            <li>Planilla de servicio básico actual <strong>(obligatorio)</strong></li>
+            <li>RUC (si aplica)</li>
+            <li>Declaración del impuesto a la renta (si aplica)</li>
+          </ul>
+        </div>
+        <div class="field">
+          <label class="field-label">Adjuntar documentos <span class="req">✦</span></label>
+          <div class="file-drop" id="fileDrop" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+            <input type="file" id="archivos" multiple accept=".pdf,.jpg,.jpeg,.png" onchange="handleFileSelect(event)">
+            <div class="file-drop-icon">📎</div>
+            <div class="file-drop-text">Arrastra archivos aquí o <strong>haz clic para seleccionar</strong></div>
+            <div class="file-drop-hint">PDF, JPG o PNG · Máximo 10 MB por archivo</div>
+          </div>
+          <div class="field-error" id="err-archivos">Debe adjuntar al menos un documento.</div>
+          <div class="file-list" id="fileList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 7: BENEFICIARIOS ═══ -->
+    <div class="form-step hidden" id="step-7">
+      <div class="section-header">
+        <div class="section-number">Sección 7 de 9 · Beneficiarios</div>
+        <div class="section-title">Beneficiarios del Seguro</div>
+        <div class="section-subtitle">El porcentaje total de todos los beneficiarios debe sumar exactamente 100%.</div>
+      </div>
+      <div class="section-body">
+        <div id="beneficiariosList"></div>
+        <button class="btn-add" onclick="addBeneficiary()">
+          <span style="font-size:1.1rem">＋</span> Agregar otro beneficiario
+        </button>
+        <div class="pct-summary" style="margin-top:20px;">
+          <div>
+            <div class="pct-label">Total asignado</div>
+            <div class="pct-value warn" id="pctValue">0%</div>
+          </div>
+          <div class="pct-right">
+            <div class="pct-bar-wrap">
+              <div class="pct-bar-fill warn" id="pctBar" style="width:0%"></div>
+            </div>
+            <div class="pct-msg warn" id="pctMsg">Agregue beneficiarios y asigne el 100%</div>
+          </div>
+        </div>
+        <div class="field-error" id="err-beneficiarios" style="margin-top:8px;"></div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 8: PERSONA EXPUESTA (PEP) ═══ -->
+    <div class="form-step hidden" id="step-8">
+      <div class="section-header">
+        <div class="section-number">Sección 8 de 9 · Declaración PEP</div>
+        <div class="section-title">Persona Expuesta Políticamente</div>
+        <div class="section-subtitle">Requerido por la normativa ecuatoriana de prevención de lavado de activos.</div>
+      </div>
+      <div class="section-body">
+        <div class="info-box">
+          Una <strong>Persona Expuesta Políticamente (PEP)</strong> es aquella que desempeña o ha desempeñado en los últimos 2 años funciones públicas de alto nivel: presidente, ministros, alcaldes, jueces, militares de alto rango, directivos de empresas estatales, entre otros.
+        </div>
+        <div class="field">
+          <label class="field-label">¿Es usted una Persona Expuesta Políticamente (PEP)? <span class="req">✦</span></label>
+          <div class="radio-group row" id="pepGroup">
+            <label class="radio-opt" onclick="selectRadio('pep','si',this);toggleField('fieldPep',true)"><input type="radio" name="pep" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('pep','no',this);toggleField('fieldPep',false)"><input type="radio" name="pep" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-pep">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldPep">
+          <div class="field">
+            <label class="field-label" for="detPep">Cargo o función que desempeña/desempeñó <span class="req">✦</span></label>
+            <input type="text" id="detPep" placeholder="Ej: Concejal del Municipio de Guayaquil">
+          </div>
+          <div class="field">
+            <label class="field-label" for="instPep">Institución <span class="req">✦</span></label>
+            <input type="text" id="instPep" placeholder="Ej: Municipio de Guayaquil">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">¿Tiene un familiar cercano que sea PEP? <span class="req">✦</span></label>
+          <div class="radio-group row" id="famPepGroup">
+            <label class="radio-opt" onclick="selectRadio('famPep','si',this);toggleField('fieldFamPep',true)"><input type="radio" name="famPep" value="si"> Sí</label>
+            <label class="radio-opt" onclick="selectRadio('famPep','no',this);toggleField('fieldFamPep',false)"><input type="radio" name="famPep" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-famPep">Seleccione una opción.</div>
+        </div>
+        <div class="hidden" id="fieldFamPep">
+          <div class="field">
+            <label class="field-label" for="detFamPep">Nombre, parentesco y cargo del familiar <span class="req">✦</span></label>
+            <textarea id="detFamPep" placeholder="Ej: Juan Gómez (padre) - Prefecto de El Oro" style="min-height:70px;"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ STEP 9: CONFIRMACIÓN ═══ -->
+    <div class="form-step hidden" id="step-9">
+      <div class="section-header">
+        <div class="section-number">Sección 9 de 9 · Confirmación</div>
+        <div class="section-title">Revise y Envíe</div>
+        <div class="section-subtitle">Verifique que toda la información sea correcta antes de enviar.</div>
+      </div>
+      <div class="section-body">
+        <div id="resumenFinal"></div>
+        <div class="field" style="margin-top:20px;">
+          <label class="check-opt" id="labelAcepto" onclick="toggleAcepto()">
+            <input type="checkbox" id="checkAcepto" style="pointer-events:none">
+            Declaro que toda la información proporcionada es verdadera y autorizo a CORPASEGO a verificarla para los fines del seguro de vida solicitado.
+          </label>
+          <div class="field-error" id="err-acepto">Debe aceptar la declaración para continuar.</div>
+        </div>
+        <div class="field">
+          <label class="check-opt" id="labelDatos" onclick="toggleDatos()">
+            <input type="checkbox" id="checkDatos" style="pointer-events:none">
+            Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de CORPASEGO.
+          </label>
+          <div class="field-error" id="err-datos">Debe aceptar el tratamiento de datos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <div class="nav-buttons" id="navButtons">
+      <button class="btn-back" id="btnBack" onclick="goStep(-1)" disabled>← Anterior</button>
+      <button class="btn-next" id="btnNext" onclick="goStep(1)">Siguiente →</button>
+    </div>
+
+  </div><!-- /form-card -->
+</div><!-- /form-outer -->
+
+<script>
+// ─────────────────────────────────────────────
+// CONFIGURACIÓN — reemplaza con tu URL de Apps Script
+// ─────────────────────────────────────────────
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOrbACm2CbqYBr0AVGYTmwRCGKj06rQcQ9_qrmWJEIwBpTOpPMA2i_IEoNYQPoZiTx/exec';
+
+// ─────────────────────────────────────────────
+const STEPS = [
+  { label: 'Inicio' },
+  { label: 'ID' },
+  { label: 'Personal' },
+  { label: 'Salud' },
+  { label: 'Ocupación' },
+  { label: 'Pago' },
+  { label: 'Docs' },
+  { label: 'Beneficiarios' },
+  { label: 'PEP' },
+  { label: 'Confirmar' },
+];
+
+let currentStep = 0;
+let beneficiaryCount = 0;
+let selectedFiles = [];
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  buildProgress();
+  updateProgress();
+  addBeneficiary();
+  // max fecha de nacimiento = hoy
+  document.getElementById('fechaNac').max = new Date().toISOString().split('T')[0];
+  // IMC en tiempo real
+  ['estatura','peso'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updateIMC);
+  });
+});
+
+// ── PROGRESS ──
+function buildProgress() {
+  document.getElementById('progressSteps').innerHTML = STEPS.map((s, i) => `
+    <div class="step-dot ${i===0?'active':''}" id="sdot-${i}">
+      <div class="step-circle">${i+1}</div>
+      <div class="step-label">${s.label}</div>
+    </div>
+  `).join('');
+}
+
+function updateProgress() {
+  STEPS.forEach((_, i) => {
+    const d = document.getElementById(`sdot-${i}`);
+    d.className = 'step-dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+  });
+  const pct = (currentStep / (STEPS.length - 1)) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('btnBack').disabled = currentStep === 0;
+  const isLast = currentStep === STEPS.length - 1;
+  const btn = document.getElementById('btnNext');
+  btn.textContent = isLast ? '✓ Enviar Solicitud' : 'Siguiente →';
+  btn.className = isLast ? 'btn-submit' : 'btn-next';
+}
+
+// ── HELPERS ──
+function selectRadio(name, value, el) {
+  document.querySelectorAll(`[name="${name}"]`).forEach(r => r.closest('.radio-opt').classList.remove('selected'));
+  el.classList.add('selected');
+  document.querySelector(`[name="${name}"][value="${value}"]`).checked = true;
+  hideErr('err-' + name);
+}
+
+function toggleField(id, show) {
+  document.getElementById(id).classList.toggle('hidden', !show);
+}
+
+function hideErr(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('show');
+}
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (el) { if (msg) el.textContent = msg; el.classList.add('show'); }
+}
+function markErr(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('error');
+}
+function clearErr(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('error');
+}
+
+// ── CEDULA VALIDATION (Módulo 10 Ecuador) ──
+function validateCedula(cedula) {
+  if (!/^\d{10}$/.test(cedula)) return false;
+  const prov = parseInt(cedula.substring(0, 2));
+  if (prov < 1 || prov > 24) return false;
+  const digits = cedula.split('').map(Number);
+  const verifier = digits[9];
+  const sum = digits.slice(0, 9).reduce((acc, d, i) => {
+    let val = i % 2 === 0 ? d * 2 : d;
+    if (val > 9) val -= 9;
+    return acc + val;
+  }, 0);
+  const mod = sum % 10;
+  const check = mod === 0 ? 0 : 10 - mod;
+  return check === verifier;
+}
+
+// ── IMC ──
+function updateIMC() {
+  const h = parseFloat(document.getElementById('estatura').value);
+  const w = parseFloat(document.getElementById('peso').value);
+  const box = document.getElementById('imcDisplay');
+  if (h > 0.5 && w > 0) {
+    const imc = w / (h * h);
+    let cat = '', color = '';
+    if (imc < 18.5) { cat = 'Bajo peso'; color = '#E67E22'; }
+    else if (imc < 25) { cat = 'Normal'; color = 'var(--success)'; }
+    else if (imc < 30) { cat = 'Sobrepeso'; color = '#E67E22'; }
+    else { cat = 'Obesidad'; color = 'var(--error)'; }
+    box.innerHTML = `IMC calculado: <strong style="color:${color}">${imc.toFixed(1)} — ${cat}</strong>`;
+    box.classList.remove('hidden');
+  } else {
+    box.classList.add('hidden');
+  }
+}
+
+// ── FILE HANDLING ──
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('fileDrop').classList.add('dragover');
+}
+function handleDragLeave(e) {
+  document.getElementById('fileDrop').classList.remove('dragover');
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('fileDrop').classList.remove('dragover');
+  processFiles(Array.from(e.dataTransfer.files));
+}
+function handleFileSelect(e) {
+  processFiles(Array.from(e.target.files));
+}
+function processFiles(files) {
+  const allowed = ['application/pdf','image/jpeg','image/jpg','image/png'];
+  files.forEach(f => {
+    if (!allowed.includes(f.type)) {
+      alert(`Archivo no permitido: ${f.name}. Solo PDF, JPG o PNG.`);
+      return;
+    }
+    if (f.size > 10 * 1024 * 1024) {
+      alert(`El archivo ${f.name} supera los 10 MB.`);
+      return;
+    }
+    if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) {
+      selectedFiles.push(f);
+    }
+  });
+  renderFileList();
+  if (selectedFiles.length > 0) hideErr('err-archivos');
+}
+function removeFile(idx) {
+  selectedFiles.splice(idx, 1);
+  renderFileList();
+}
+function renderFileList() {
+  const list = document.getElementById('fileList');
+  if (selectedFiles.length === 0) { list.innerHTML = ''; return; }
+  list.innerHTML = selectedFiles.map((f, i) => {
+    const icon = f.type === 'application/pdf' ? '📄' : '🖼️';
+    const size = f.size < 1024 * 1024 ? `${(f.size/1024).toFixed(0)} KB` : `${(f.size/1024/1024).toFixed(1)} MB`;
+    return `
+      <div class="file-item">
+        <span class="file-icon">${icon}</span>
+        <span class="file-name">${f.name}</span>
+        <span class="file-size">${size}</span>
+        <button class="file-remove" onclick="removeFile(${i})" title="Eliminar">✕</button>
+      </div>`;
+  }).join('');
+}
+
+// ── BENEFICIARIOS ──
+function addBeneficiary() {
+  beneficiaryCount++;
+  const n = beneficiaryCount;
+  const container = document.getElementById('beneficiariosList');
+  const div = document.createElement('div');
+  div.className = 'beneficiary-card';
+  div.id = `ben-${n}`;
+  div.innerHTML = `
+    <div class="beneficiary-header">
+      <div class="beneficiary-title">Beneficiario ${n}</div>
+      ${n > 1 ? `<button class="btn-remove" onclick="removeBeneficiary(${n})">✕ Eliminar</button>` : ''}
+    </div>
+    <div class="beneficiary-body">
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Nombres y Apellidos <span class="req">✦</span></label>
+          <input type="text" class="ben-nombre" placeholder="Nombre completo">
+        </div>
+        <div class="field">
+          <label class="field-label">Parentesco <span class="req">✦</span></label>
+          <select class="ben-parentesco">
+            <option value="">Seleccione...</option>
+            <option>Cónyuge</option><option>Hijo/a</option><option>Padre</option>
+            <option>Madre</option><option>Hermano/a</option><option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Cédula <span class="req">✦</span></label>
+          <input type="text" class="ben-cedula" placeholder="0912345678" maxlength="10" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label class="field-label">Fecha de Nacimiento <span class="req">✦</span></label>
+          <input type="date" class="ben-fechanac">
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label class="field-label">Correo Electrónico <span class="req">✦</span></label>
+          <input type="email" class="ben-email" placeholder="correo@ejemplo.com">
+        </div>
+        <div class="field">
+          <label class="field-label">Teléfono <span class="req">✦</span></label>
+          <input type="tel" class="ben-tel" placeholder="0991234567">
+        </div>
+      </div>
+      <div class="field" style="max-width:200px;">
+        <label class="field-label">Porcentaje (%) <span class="req">✦</span></label>
+        <input type="number" class="ben-pct" placeholder="Ej: 50" min="1" max="100" oninput="updatePctDisplay()">
+      </div>
+    </div>`;
+  container.appendChild(div);
+  updatePctDisplay();
+}
+
+function removeBeneficiary(id) {
+  document.getElementById(`ben-${id}`).remove();
+  updatePctDisplay();
+}
+
+function calcTotal() {
+  let t = 0;
+  document.querySelectorAll('.ben-pct').forEach(i => {
+    const v = parseFloat(i.value);
+    if (!isNaN(v)) t += v;
+  });
+  return Math.round(t * 100) / 100;
+}
+
+function updatePctDisplay() {
+  const total = calcTotal();
+  const pctVal = document.getElementById('pctValue');
+  const pctBar = document.getElementById('pctBar');
+  const pctMsg = document.getElementById('pctMsg');
+  pctVal.textContent = total + '%';
+  pctBar.style.width = Math.min(total, 100) + '%';
+  const cls = total === 100 ? 'ok' : total > 100 ? 'over' : 'warn';
+  ['ok','warn','over'].forEach(c => {
+    pctVal.classList.toggle(c, c===cls);
+    pctBar.classList.toggle(c, c===cls);
+    pctMsg.classList.toggle(c, c===cls);
+  });
+  if (total === 100) pctMsg.textContent = '✓ ¡Perfecto! Los porcentajes suman 100%';
+  else if (total > 100) pctMsg.textContent = `Excede en ${(total-100).toFixed(2)}%. Reduzca algún porcentaje.`;
+  else pctMsg.textContent = `Faltan ${(100-total).toFixed(2)}% para completar el 100%.`;
+}
+
+// ── CHECKBOXES ──
+function toggleAcepto() {
+  const cb = document.getElementById('checkAcepto');
+  const lbl = document.getElementById('labelAcepto');
+  cb.checked = !cb.checked;
+  lbl.classList.toggle('selected', cb.checked);
+  if (cb.checked) hideErr('err-acepto');
+}
+function toggleDatos() {
+  const cb = document.getElementById('checkDatos');
+  const lbl = document.getElementById('labelDatos');
+  cb.checked = !cb.checked;
+  lbl.classList.toggle('selected', cb.checked);
+  if (cb.checked) hideErr('err-datos');
+}
+
+// ── TIPO DOC TOGGLE ──
+document.addEventListener('change', e => {
+  if (e.target.name === 'tipoDoc') {
+    const isCed = e.target.value === 'cedula';
+    document.getElementById('fieldCedula').classList.toggle('hidden', !isCed);
+    document.getElementById('fieldPasaporte').classList.toggle('hidden', isCed);
+  }
+});
+
+// ── VALIDATION ──
+function validateStep(step) {
+  let ok = true;
+
+  if (step === 1) {
+    const tipo = document.querySelector('[name="tipoDoc"]:checked');
+    if (!tipo) { showErr('err-tipoDoc'); ok = false; }
+    else {
+      hideErr('err-tipoDoc');
+      if (tipo.value === 'cedula') {
+        const v = document.getElementById('numCedula').value.trim();
+        if (!validateCedula(v)) { showErr('err-numCedula'); markErr('numCedula'); ok = false; }
+        else { hideErr('err-numCedula'); clearErr('numCedula'); }
+      } else {
+        const v = document.getElementById('numPasaporte').value.trim();
+        if (!v) { showErr('err-numPasaporte'); markErr('numPasaporte'); ok = false; }
+        else { hideErr('err-numPasaporte'); clearErr('numPasaporte'); }
+      }
+    }
+  }
+
+  if (step === 2) {
+    const fields = [
+      { id:'nombres', msg:'Ingrese sus nombres completos.' },
+      { id:'fechaNac', msg:'Ingrese su fecha de nacimiento.' },
+      { id:'telefono', msg:'Ingrese su número de teléfono.' },
+      { id:'direccion', msg:'Ingrese su dirección de domicilio.' },
+      { id:'ciudad', msg:'Ingrese su ciudad.' },
+      { id:'nacionalidad', msg:'Ingrese su nacionalidad.' },
+    ];
+    fields.forEach(f => {
+      const v = document.getElementById(f.id).value.trim();
+      if (!v) { showErr('err-'+f.id, f.msg); markErr(f.id); ok = false; }
+      else { hideErr('err-'+f.id); clearErr(f.id); }
+    });
+    const email = document.getElementById('email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err-email','Ingrese un correo válido.'); markErr('email'); ok = false; }
+    else { hideErr('err-email'); clearErr('email'); }
+    if (!document.getElementById('estadoCivil').value) { showErr('err-estadoCivil','Seleccione su estado civil.'); ok = false; }
+    else hideErr('err-estadoCivil');
+    if (!document.getElementById('genero').value) { showErr('err-genero','Seleccione su género.'); ok = false; }
+    else hideErr('err-genero');
+    if (!document.getElementById('provincia').value) { showErr('err-provincia','Seleccione su provincia.'); ok = false; }
+    else hideErr('err-provincia');
+    const est = parseFloat(document.getElementById('estatura').value);
+    if (!est || est < 1 || est > 2.5) { showErr('err-estatura','Ingrese una estatura válida (ej: 1.70).'); markErr('estatura'); ok = false; }
+    else { hideErr('err-estatura'); clearErr('estatura'); }
+    const pes = parseFloat(document.getElementById('peso').value);
+    if (!pes || pes < 20 || pes > 300) { showErr('err-peso','Ingrese un peso válido.'); markErr('peso'); ok = false; }
+    else { hideErr('err-peso'); clearErr('peso'); }
+  }
+
+  if (step === 3) {
+    ['tieneDiag','tieneLab','fuma','bebe','deporte'].forEach(n => {
+      if (!document.querySelector(`[name="${n}"]:checked`)) { showErr('err-'+n,'Seleccione una opción.'); ok = false; }
+      else hideErr('err-'+n);
+    });
+  }
+
+  if (step === 4) {
+    ['profesion','actEconomica','empresa','dirEmpresa'].forEach(id => {
+      const v = document.getElementById(id).value.trim();
+      if (!v) { showErr('err-'+id); markErr(id); ok = false; }
+      else { hideErr('err-'+id); clearErr(id); }
+    });
+    const ing = document.getElementById('ingresos').value.trim();
+    if (!ing) { showErr('err-ingresos'); markErr('ingresos'); ok = false; }
+    else { hideErr('err-ingresos'); clearErr('ingresos'); }
+    const act = document.getElementById('activos').value.trim();
+    if (!act) { showErr('err-activos'); markErr('activos'); ok = false; }
+    else { hideErr('err-activos'); clearErr('activos'); }
+    const pas = document.getElementById('pasivos').value.trim();
+    if (!pas) { showErr('err-pasivos'); markErr('pasivos'); ok = false; }
+    else { hideErr('err-pasivos'); clearErr('pasivos'); }
+    if (!document.querySelector('[name="impuesto"]:checked')) { showErr('err-impuesto'); ok = false; }
+    else hideErr('err-impuesto');
+    if (!document.querySelector('[name="otroSeguro"]:checked')) { showErr('err-otroSeguro'); ok = false; }
+    else hideErr('err-otroSeguro');
+  }
+
+  if (step === 5) {
+    if (!document.querySelector('[name="tarjeta"]:checked')) { showErr('err-tarjeta'); ok = false; } else hideErr('err-tarjeta');
+    if (!document.querySelector('[name="formaPago"]:checked')) { showErr('err-formaPago'); ok = false; } else hideErr('err-formaPago');
+    if (!document.querySelector('[name="frecPrima"]:checked')) { showErr('err-frecPrima'); ok = false; } else hideErr('err-frecPrima');
+  }
+
+  if (step === 6) {
+    if (selectedFiles.length === 0) { showErr('err-archivos','Debe adjuntar al menos un documento.'); ok = false; }
+    else hideErr('err-archivos');
+  }
+
+  if (step === 7) {
+    const cards = document.querySelectorAll('.beneficiary-card');
+    if (cards.length === 0) {
+      showErr('err-beneficiarios','Agregue al menos un beneficiario.');
+      ok = false;
+    } else {
+      const total = calcTotal();
+      if (total !== 100) {
+        showErr('err-beneficiarios', `Los porcentajes suman ${total}%. Deben sumar exactamente 100%.`);
+        ok = false;
+      } else hideErr('err-beneficiarios');
+      cards.forEach(card => {
+        ['ben-nombre','ben-email','ben-tel'].forEach(cls => {
+          const el = card.querySelector('.'+cls);
+          if (!el.value.trim()) { el.classList.add('error'); ok = false; }
+          else el.classList.remove('error');
+        });
+        const par = card.querySelector('.ben-parentesco');
+        if (!par.value) { par.classList.add('error'); ok = false; }
+        else par.classList.remove('error');
+        const ced = card.querySelector('.ben-cedula');
+        if (!ced.value.trim()) { ced.classList.add('error'); ok = false; }
+        else ced.classList.remove('error');
+      });
+    }
+  }
+
+  if (step === 8) {
+    ['pep','famPep'].forEach(n => {
+      if (!document.querySelector(`[name="${n}"]:checked`)) { showErr('err-'+n,'Seleccione una opción.'); ok = false; }
+      else hideErr('err-'+n);
+    });
+  }
+
+  if (step === 9) {
+    if (!document.getElementById('checkAcepto').checked) { showErr('err-acepto'); ok = false; }
+    else hideErr('err-acepto');
+    if (!document.getElementById('checkDatos').checked) { showErr('err-datos'); ok = false; }
+    else hideErr('err-datos');
+  }
+
+  return ok;
+}
+
+// ── NAVIGATION ──
+function goStep(dir) {
+  if (dir === 1) {
+    if (currentStep === STEPS.length - 1) { submitForm(); return; }
+    if (!validateStep(currentStep)) return;
+  }
+  document.getElementById(`step-${currentStep}`).classList.add('hidden');
+  currentStep += dir;
+  document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+  if (currentStep === 9) buildResumen();
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── RESUMEN ──
+function buildResumen() {
+  const tipo = document.querySelector('[name="tipoDoc"]:checked')?.value || '—';
+  const doc = tipo === 'cedula' ? document.getElementById('numCedula').value : document.getElementById('numPasaporte').value;
+  const bensRows = [];
+  document.querySelectorAll('.beneficiary-card').forEach(card => {
+    const nombre = card.querySelector('.ben-nombre').value;
+    const par = card.querySelector('.ben-parentesco').value;
+    const pct = card.querySelector('.ben-pct').value;
+    bensRows.push(`<div class="ben-resumen-row"><span><strong>${nombre}</strong> · ${par}</span><span>${pct}%</span></div>`);
+  });
+
+  const items = [
+    { k:'Documento', v: `${tipo === 'cedula' ? 'Cédula' : 'Pasaporte'} ${doc}` },
+    { k:'Nombre', v: document.getElementById('nombres').value },
+    { k:'Correo', v: document.getElementById('email').value },
+    { k:'Teléfono', v: document.getElementById('telefono').value },
+    { k:'Ciudad', v: document.getElementById('ciudad').value + ', ' + document.getElementById('provincia').value },
+    { k:'Profesión', v: document.getElementById('profesion').value },
+    { k:'Empresa', v: document.getElementById('empresa').value },
+    { k:'Ingresos/mes', v: '$' + document.getElementById('ingresos').value },
+    { k:'Tarjeta', v: (document.querySelector('[name="tarjeta"]:checked')?.value || '—').toUpperCase() },
+    { k:'Forma de pago', v: document.querySelector('[name="formaPago"]:checked')?.value || '—' },
+    { k:'Frecuencia prima', v: document.querySelector('[name="frecPrima"]:checked')?.value || '—' },
+    { k:'Documentos', v: selectedFiles.length + ' archivo(s) adjunto(s)' },
+  ];
+
+  document.getElementById('resumenFinal').innerHTML = `
+    <div class="resumen-grid">
+      ${items.map(i => `<div class="resumen-item"><div class="resumen-key">${i.k}</div><div class="resumen-val">${i.v || '—'}</div></div>`).join('')}
+    </div>
+    <div class="resumen-ben">
+      <div class="resumen-ben-title">Beneficiarios</div>
+      ${bensRows.join('')}
+    </div>`;
+}
+
+// ── SUBMIT ──
+async function submitForm() {
+  if (!validateStep(9)) return;
+  document.getElementById('loadingOverlay').classList.add('show');
+
+  const beneficiarios = [];
+  document.querySelectorAll('.beneficiary-card').forEach(card => {
+    beneficiarios.push({
+      nombre: card.querySelector('.ben-nombre').value,
+      parentesco: card.querySelector('.ben-parentesco').value,
+      cedula: card.querySelector('.ben-cedula').value,
+      fechaNacimiento: card.querySelector('.ben-fechanac').value,
+      email: card.querySelector('.ben-email').value,
+      telefono: card.querySelector('.ben-tel').value,
+      porcentaje: card.querySelector('.ben-pct').value,
+    });
+  });
+
+  const tipo = document.querySelector('[name="tipoDoc"]:checked')?.value;
+  const payload = {
+    // Identificación
+    tipoDocumento: tipo,
+    numeroDocumento: tipo === 'cedula' ? document.getElementById('numCedula').value : document.getElementById('numPasaporte').value,
+    // Datos personales
+    nombres: document.getElementById('nombres').value,
+    fechaNacimiento: document.getElementById('fechaNac').value,
+    estadoCivil: document.getElementById('estadoCivil').value,
+    genero: document.getElementById('genero').value,
+    nacionalidad: document.getElementById('nacionalidad').value,
+    email: document.getElementById('email').value,
+    telefono: document.getElementById('telefono').value,
+    direccion: document.getElementById('direccion').value,
+    ciudad: document.getElementById('ciudad').value,
+    provincia: document.getElementById('provincia').value,
+    estatura: document.getElementById('estatura').value,
+    peso: document.getElementById('peso').value,
+    // Salud
+    tieneDiagnostico: document.querySelector('[name="tieneDiag"]:checked')?.value,
+    detalleDiagnostico: document.getElementById('detEnfermedad')?.value || '',
+    fechaDiagnostico: document.getElementById('fechaDiag')?.value || '',
+    examenesLaboratorio: document.querySelector('[name="tieneLab"]:checked')?.value,
+    detalleExamenes: document.getElementById('detLab')?.value || '',
+    fuma: document.querySelector('[name="fuma"]:checked')?.value,
+    desdeFuma: document.getElementById('desdeFuma')?.value || '',
+    cantidadCigarrillos: document.getElementById('cntFuma')?.value || '',
+    bebeAlcohol: document.querySelector('[name="bebe"]:checked')?.value,
+    frecuenciaBebe: document.querySelector('[name="frecBebe"]:checked')?.value || '',
+    practicaDeporteRiesgo: document.querySelector('[name="deporte"]:checked')?.value,
+    detalleDeporte: document.getElementById('detDeporte')?.value || '',
+    // Ocupación
+    profesion: document.getElementById('profesion').value,
+    actividadEconomica: document.getElementById('actEconomica').value,
+    empresa: document.getElementById('empresa').value,
+    telefonoEmpresa: document.getElementById('telEmpresa').value,
+    direccionEmpresa: document.getElementById('dirEmpresa').value,
+    ingresosMensuales: document.getElementById('ingresos').value,
+    otrosIngresos: document.getElementById('otrosIngresos').value,
+    activos: document.getElementById('activos').value,
+    pasivos: document.getElementById('pasivos').value,
+    declaraImpuesto: document.querySelector('[name="impuesto"]:checked')?.value,
+    tieneOtroSeguro: document.querySelector('[name="otroSeguro"]:checked')?.value,
+    detalleOtroSeguro: document.getElementById('detOtroSeguro')?.value || '',
+    // Pago
+    tipoTarjeta: document.querySelector('[name="tarjeta"]:checked')?.value,
+    formaPago: document.querySelector('[name="formaPago"]:checked')?.value,
+    tipoDiferido: document.querySelector('[name="tipoDiferido"]:checked')?.value || '',
+    frecuenciaPrima: document.querySelector('[name="frecPrima"]:checked')?.value,
+    // PEP
+    esPEP: document.querySelector('[name="pep"]:checked')?.value,
+    detallePEP: document.getElementById('detPep')?.value || '',
+    institucionPEP: document.getElementById('instPep')?.value || '',
+    familiarPEP: document.querySelector('[name="famPep"]:checked')?.value,
+    detalleFamiliarPEP: document.getElementById('detFamPep')?.value || '',
+    // Beneficiarios
+    beneficiarios: JSON.stringify(beneficiarios),
+    cantidadDocumentos: selectedFiles.length,
+    nombresDocumentos: selectedFiles.map(f => f.name).join(', '),
+    timestamp: new Date().toISOString(),
+    referencia: 'CORP-' + Date.now().toString(36).toUpperCase(),
+  };
+
+  if (APPS_SCRIPT_URL !== 'TU_URL_DE_APPS_SCRIPT_AQUI') {
+    try {
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(payload));
+      selectedFiles.forEach((f, i) => formData.append(`file_${i}`, f));
+      await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+    } catch (e) {
+      console.error('Error al enviar:', e);
+    }
+  } else {
+    await new Promise(r => setTimeout(r, 1800));
+    console.log('Payload (modo demo):', payload);
+  }
+
+  document.getElementById('loadingOverlay').classList.remove('show');
+  document.getElementById('formCard').querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
+  document.getElementById('navButtons').classList.add('hidden');
+  document.getElementById('successRef').textContent = 'Referencia: ' + payload.referencia;
+  document.getElementById('successScreen').classList.add('show');
+  document.getElementById('progressFill').style.width = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
