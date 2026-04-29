@@ -1744,9 +1744,19 @@ async function submitForm() {
   if (APPS_SCRIPT_URL !== 'TU_URL_DE_APPS_SCRIPT_AQUI') {
     try {
       const formData = new FormData();
-      formData.append('data', JSON.stringify(payload));
-      selectedFiles.forEach((f, i) => formData.append(`file_${i}`, f));
-      await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+
+formData.append("data",
+ JSON.stringify(datos));
+
+selectedFiles.forEach(file=>{
+ formData.append("files",file);
+});
+
+fetch(APPS_SCRIPT_URL,{
+ method:"POST",
+ body: formData
+});
+                                
     } catch (e) {
       console.error('Error al enviar:', e);
     }
